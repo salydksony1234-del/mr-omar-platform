@@ -1,0 +1,2505 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منصة مستر عمر الورداني | English Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dark:#050510;--dark2:#0a0a1a;--surface:#0f0f20;--surface2:#161628;
+  --gold:#f5c842;--gold2:#d4a820;--teal:#00d4aa;--blue:#4a8fe2;--purple:#9b6cf7;
+  --red:#ff5f6d;--orange:#ff9f43;--green:#2ecc71;--zoom:#2d8cff;
+  --text:#f0eeff;--muted:#7070a0;
+  --border:rgba(245,200,66,.13);--glow:rgba(245,200,66,.07);
+  --r:14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Tajawal',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;min-height:100vh}
+
+body::before{content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(245,200,66,.028) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(245,200,66,.028) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none;z-index:0}
+
+.orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.orb1{width:600px;height:600px;background:rgba(155,108,247,.07);top:-150px;right:-200px}
+.orb2{width:500px;height:500px;background:rgba(0,212,170,.06);bottom:-150px;left:-200px}
+
+/* LOADER */
+#loader{position:fixed;inset:0;z-index:9999;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .7s,visibility .7s}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-ring{width:70px;height:70px;border:4px solid rgba(245,200,66,.15);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:1.5rem}
+.loader-text{color:var(--gold);font-size:1.1rem;font-weight:800;letter-spacing:2px;font-family:'Cairo',sans-serif}
+.loader-sub{color:var(--muted);font-size:.82rem;margin-top:.5rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:300;background:rgba(5,5,16,.93);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;gap:1rem;flex-wrap:wrap}
+.logo{font-family:'Cairo',sans-serif;font-size:1.4rem;font-weight:900;color:var(--gold);display:flex;align-items:center;gap:.7rem;text-decoration:none;cursor:pointer}
+.logo-icon{width:44px;height:44px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;box-shadow:0 0 20px rgba(245,200,66,.3)}
+.logo-icon img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.logo span{color:var(--teal)}
+.nav-right{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.nav-btn{background:rgba(245,200,66,.1);border:1px solid var(--border);color:var(--gold);padding:.45rem 1.1rem;border-radius:8px;font-family:'Tajawal',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s}
+.nav-btn:hover,.nav-btn.active{background:var(--gold);color:#000}
+.nav-btn.admin-btn{background:rgba(155,108,247,.15);border-color:rgba(155,108,247,.3);color:var(--purple)}
+.nav-btn.admin-btn:hover{background:var(--purple);color:#fff}
+
+/* PAGE NAV TABS */
+.page-nav{position:relative;z-index:2;background:rgba(10,10,26,.8);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
+.page-nav-inner{max-width:1200px;margin:0 auto;display:flex;gap:0;overflow-x:auto;padding:0 1rem;scrollbar-width:none}
+.page-nav-inner::-webkit-scrollbar{display:none}
+.page-tab{padding:.75rem 1.4rem;font-family:'Cairo',sans-serif;font-size:.88rem;font-weight:800;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:.4rem;background:none;border-top:none;border-left:none;border-right:none}
+.page-tab:hover{color:var(--text)}
+.page-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* PAGES */
+.page{display:none;position:relative;z-index:1}
+.page.active{display:block}
+
+/* HERO */
+.hero{position:relative;z-index:1;max-width:950px;margin:0 auto;padding:4rem 2rem 2.5rem;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(245,200,66,.08);border:1px solid var(--border);color:var(--gold);font-size:.78rem;font-weight:700;padding:.45rem 1.3rem;border-radius:50px;margin-bottom:2rem;animation:fadeDown .8s ease forwards}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:pulse 1.5s infinite;flex-shrink:0}
+.hero-avatar{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,var(--surface2),var(--dark2));border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:3.5rem;margin:0 auto 1.5rem;box-shadow:0 0 50px rgba(245,200,66,.2);position:relative;overflow:hidden;cursor:pointer}
+.hero-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.hero-avatar .edit-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;font-size:.75rem;color:#fff;font-weight:700;opacity:0;transition:.2s;border-radius:50%;pointer-events:none}
+body.admin-mode .hero-avatar:hover .edit-overlay{opacity:1}
+.hero h1{font-family:'Cairo',sans-serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:900;line-height:1.2;margin-bottom:.8rem;animation:fadeUp .9s ease forwards}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-subtitle{font-size:1rem;color:var(--muted);max-width:580px;margin:0 auto 1rem;line-height:1.9;animation:fadeUp 1s .1s both}
+.hero-features{list-style:none;padding:0;margin:.5rem auto 1rem;max-width:500px;text-align:right;display:flex;flex-direction:column;gap:.35rem}
+.hero-features li{font-size:.85rem;color:rgba(255,255,255,.85);background:rgba(255,255,255,.05);border-radius:8px;padding:.35rem .8rem}
+.hero-slogan{font-size:.9rem;color:var(--gold);font-weight:700;margin-bottom:1.5rem;text-align:center}
+.hero-stats{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-top:1.5rem}
+.stat{text-align:center}
+.stat-num{font-family:'Cairo',sans-serif;font-size:1.8rem;font-weight:900;color:var(--gold)}
+.stat-label{font-size:.78rem;color:var(--muted);margin-top:.2rem}
+
+/* CONTACT STRIP */
+.contact-strip{position:relative;z-index:1;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.contact-strip-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:1.5rem;padding:.8rem 2rem;flex-wrap:wrap}
+.contact-item{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.contact-item:hover{color:var(--gold)}
+.contact-item .ci{font-size:1rem}
+
+/* SECTIONS NAV */
+.sections-nav{position:relative;z-index:1;max-width:1200px;margin:2rem auto 0;padding:0 2rem}
+.sections-title{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700;color:var(--muted);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem}
+.sections-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.stage-tabs{display:flex;gap:.7rem;flex-wrap:wrap}
+.stage-tab{background:var(--surface);border:2px solid var(--border);color:var(--muted);padding:.7rem 1.6rem;border-radius:10px;font-family:'Cairo',sans-serif;font-size:.9rem;font-weight:800;cursor:pointer;transition:all .25s;display:flex;align-items:center;gap:.5rem}
+.stage-tab:hover{border-color:var(--gold);color:var(--gold)}
+.stage-tab.active{background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(245,200,66,.05));border-color:var(--gold);color:var(--gold)}
+.tab-count{background:rgba(245,200,66,.2);color:var(--gold);font-size:.68rem;padding:.1rem .5rem;border-radius:10px}
+
+/* GRADE GRID */
+.grade-section{position:relative;z-index:1;max-width:1200px;margin:2rem auto 1rem;padding:0 2rem;display:none}
+.grade-section.active{display:block}
+.grade-header{display:flex;align-items:center;gap:1.2rem;margin-bottom:2rem}
+.grade-header-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+.grade-header h2{font-family:'Cairo',sans-serif;font-size:1.5rem;font-weight:900}
+.grade-header p{font-size:.85rem;color:var(--muted);margin-top:.2rem}
+.grades-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.4rem}
+.grade-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .3s;cursor:pointer}
+.grade-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.grade-card-top{padding:1.4rem 1.4rem 1rem;display:flex;align-items:center;gap:1rem}
+.grade-num{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Cairo',sans-serif;font-size:1.4rem;font-weight:900;flex-shrink:0}
+.grade-card-info h3{font-family:'Cairo',sans-serif;font-size:1.05rem;font-weight:800}
+.grade-card-info p{font-size:.78rem;color:var(--muted);margin-top:.2rem}
+.grade-card-body{padding:.8rem 1.4rem 1.4rem;border-top:1px solid var(--border);margin-top:.5rem}
+.video-count{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted);margin-bottom:.5rem}
+.video-count span{color:var(--gold);font-weight:800}
+.btn-open{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:.55rem 1.3rem;border-radius:8px;font-family:'Tajawal',sans-serif;font-size:.85rem;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;transition:all .2s;margin-top:.5rem}
+.btn-open:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(245,200,66,.3)}
+
+/* ====== ONLINE SESSIONS PAGE ====== */
+.page-content{max-width:1200px;margin:0 auto;padding:2.5rem 2rem}
+.page-title{font-family:'Cairo',sans-serif;font-size:1.8rem;font-weight:900;margin-bottom:.5rem;display:flex;align-items:center;gap:.7rem}
+.page-title em{font-style:normal;color:var(--gold)}
+.page-desc{color:var(--muted);font-size:.9rem;margin-bottom:2rem;line-height:1.8}
+
+.sessions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.4rem;margin-bottom:3rem}
+.session-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .3s}
+.session-card:hover{border-color:rgba(245,200,66,.3);transform:translateY(-3px);box-shadow:0 10px 40px rgba(0,0,0,.4)}
+.session-card-top{padding:1.2rem 1.4rem 1rem;display:flex;align-items:flex-start;gap:1rem}
+.session-platform-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.session-platform-icon.yt{background:rgba(255,68,68,.15)}
+.session-platform-icon.fb{background:rgba(24,119,242,.15)}
+.session-platform-icon.zm{background:rgba(45,140,255,.15)}
+.session-info{flex:1;min-width:0}
+.session-info h3{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:800;margin-bottom:.3rem}
+.session-info .session-meta{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.session-badge{font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:5px}
+.session-badge.live{background:rgba(255,68,68,.15);color:#ff4444;border:1px solid rgba(255,68,68,.2)}
+.session-badge.upcoming{background:rgba(0,212,170,.12);color:var(--teal);border:1px solid rgba(0,212,170,.2)}
+.session-badge.recorded{background:rgba(245,200,66,.12);color:var(--gold);border:1px solid rgba(245,200,66,.2)}
+.session-badge.zoom{background:rgba(45,140,255,.12);color:var(--zoom);border:1px solid rgba(45,140,255,.2)}
+.session-desc{font-size:.8rem;color:var(--muted);margin-top:.5rem;padding:0 1.4rem 1rem;line-height:1.7}
+.session-footer{padding:.8rem 1.4rem 1.2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-wrap:wrap}
+.session-time{font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:.3rem}
+.session-actions{display:flex;gap:.5rem}
+.btn-join{background:linear-gradient(135deg,var(--teal),#00a88a);color:#000;border:none;padding:.4rem 1rem;border-radius:7px;font-family:'Tajawal',sans-serif;font-size:.8rem;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;transition:all .2s}
+.btn-join:hover{transform:translateY(-1px);box-shadow:0 5px 20px rgba(0,212,170,.3)}
+.btn-join.zoom-btn{background:linear-gradient(135deg,var(--zoom),#1a6fd4)}
+.btn-join.zoom-btn:hover{box-shadow:0 5px 20px rgba(45,140,255,.3)}
+.btn-join.fb-btn{background:linear-gradient(135deg,#1877f2,#0d5bbf)}
+.btn-join.fb-btn:hover{box-shadow:0 5px 20px rgba(24,119,242,.3)}
+.btn-del-session{background:rgba(255,95,109,.08);border:1px solid rgba(255,95,109,.2);color:var(--red);width:30px;height:30px;border-radius:7px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:all .2s}
+.btn-del-session:hover{background:rgba(255,95,109,.2)}
+
+/* ====== SCHEDULE PAGE ====== */
+.schedule-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;margin-bottom:3rem}
+.schedule-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.3rem 1.5rem;transition:all .3s}
+.schedule-card:hover{border-color:rgba(245,200,66,.25)}
+.schedule-day{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:900;color:var(--gold);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.schedule-item{display:flex;align-items:center;gap:.7rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.schedule-item:last-child{border-bottom:none}
+.schedule-time{background:rgba(245,200,66,.1);color:var(--gold);font-size:.75rem;font-weight:800;padding:.25rem .6rem;border-radius:6px;font-family:'Cairo',sans-serif;white-space:nowrap}
+.schedule-grade{font-size:.82rem;color:var(--text);font-weight:600}
+.schedule-empty{font-size:.8rem;color:var(--muted);text-align:center;padding:1rem 0;opacity:.7}
+.btn-del-sched{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.8rem;margin-right:auto;padding:.2rem .4rem;border-radius:4px;transition:all .2s}
+.btn-del-sched:hover{color:var(--red)}
+
+/* ====== ADMIN PANEL ====== */
+.admin-login{max-width:440px;margin:4rem auto;padding:2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:20px}
+.admin-login h2{font-family:'Cairo',sans-serif;font-size:1.4rem;font-weight:900;color:var(--gold);text-align:center;margin-bottom:.5rem}
+.admin-login p{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:2rem}
+.admin-sections{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;margin-bottom:2rem}
+.admin-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:all .3s}
+.admin-card:hover{border-color:rgba(155,108,247,.3)}
+.admin-card h3{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:900;color:var(--purple);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.admin-row{margin-bottom:1rem}
+.admin-row label{display:block;font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:.4rem}
+.admin-row input,.admin-row textarea,.admin-row select{width:100%;background:var(--dark2);border:1px solid var(--border);border-radius:8px;padding:.65rem .9rem;color:var(--text);font-family:'Tajawal',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s}
+.admin-row input:focus,.admin-row textarea:focus,.admin-row select:focus{border-color:var(--purple)}
+.admin-row textarea{resize:vertical;min-height:70px}
+.btn-save{background:linear-gradient(135deg,var(--purple),#7a4ed4);color:#fff;border:none;padding:.6rem 1.5rem;border-radius:8px;font-family:'Cairo',sans-serif;font-size:.9rem;font-weight:800;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
+.btn-save:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(155,108,247,.3)}
+.btn-danger{background:rgba(255,95,109,.1);border:1px solid rgba(255,95,109,.3);color:var(--red);padding:.5rem 1.2rem;border-radius:8px;font-family:'Cairo',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-danger:hover{background:var(--red);color:#fff}
+.logo-preview{width:70px;height:70px;border-radius:50%;object-fit:cover;border:2px solid var(--border);margin-bottom:.8rem}
+.avatar-preview{width:90px;height:90px;border-radius:50%;object-fit:cover;border:2px solid var(--border);margin-bottom:.8rem}
+.upload-area{border:2px dashed var(--border);border-radius:10px;padding:1.2rem;text-align:center;cursor:pointer;transition:all .2s;position:relative}
+.upload-area:hover{border-color:var(--purple)}
+.upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.upload-area p{font-size:.8rem;color:var(--muted);margin-top:.4rem}
+.admin-sep{height:1px;background:var(--border);margin:1.5rem 0}
+.contact-edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.admin-logout{background:rgba(255,95,109,.1);border:1px solid rgba(255,95,109,.2);color:var(--red);padding:.4rem 1rem;border-radius:7px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Tajawal',sans-serif;transition:all .2s}
+.admin-logout:hover{background:var(--red);color:#fff}
+
+/* ====== STUDENT LOGIN SCREEN ====== */
+#studentLoginScreen{
+  position:fixed;inset:0;z-index:5000;
+  background:var(--dark);
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+  animation:fadeIn .5s ease;
+}
+#studentLoginScreen.hidden{display:none}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.login-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:2.5rem 2rem;
+  width:100%;max-width:420px;
+  text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  position:relative;
+  overflow:hidden;
+}
+.login-card::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:200px;height:200px;
+  background:radial-gradient(circle,rgba(245,200,66,.08),transparent 70%);
+  border-radius:50%;pointer-events:none;
+}
+.login-avatar{
+  width:90px;height:90px;border-radius:50%;
+  background:linear-gradient(135deg,var(--surface2),var(--dark2));
+  border:3px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.5rem;margin:0 auto 1.2rem;
+  box-shadow:0 0 30px rgba(245,200,66,.2);
+  overflow:hidden;
+}
+.login-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.login-title{font-family:'Cairo',sans-serif;font-size:1.4rem;font-weight:900;color:var(--gold);margin-bottom:.3rem}
+.login-subtitle{font-size:.83rem;color:var(--muted);margin-bottom:1.8rem;line-height:1.7}
+.login-field{margin-bottom:1rem;text-align:right}
+.login-field label{display:block;font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:.4rem}
+.login-field input{
+  width:100%;background:var(--dark2);border:1px solid var(--border);
+  border-radius:10px;padding:.7rem 1rem;
+  color:var(--text);font-family:'Tajawal',sans-serif;font-size:.95rem;
+  outline:none;transition:border-color .2s;
+}
+.login-field input:focus{border-color:var(--gold)}
+.btn-login-student{
+  width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;border:none;padding:.75rem;border-radius:10px;
+  font-family:'Cairo',sans-serif;font-size:1rem;font-weight:900;
+  cursor:pointer;transition:all .2s;margin-top:.5rem;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+}
+.btn-login-student:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,200,66,.35)}
+.login-error{background:rgba(255,95,109,.1);border:1px solid rgba(255,95,109,.25);color:var(--red);
+  padding:.6rem 1rem;border-radius:8px;font-size:.83rem;margin-top:.8rem;display:none}
+.login-error.show{display:block}
+.login-admin-link{font-size:.75rem;color:var(--muted);margin-top:1.2rem;cursor:pointer;transition:color .2s}
+.login-admin-link:hover{color:var(--gold)}
+
+/* Student welcome bar */
+#studentBar{
+  background:rgba(245,200,66,.07);
+  border-bottom:1px solid rgba(245,200,66,.15);
+  padding:.45rem 2rem;
+  display:none;
+  align-items:center;justify-content:space-between;
+  font-size:.82rem;flex-wrap:wrap;gap:.5rem;
+}
+#studentBar.show{display:flex}
+.student-info-bar{display:flex;align-items:center;gap:.5rem;color:var(--gold);font-weight:700}
+.btn-student-logout{background:rgba(255,95,109,.1);border:1px solid rgba(255,95,109,.25);
+  color:var(--red);padding:.3rem .8rem;border-radius:6px;font-size:.75rem;font-weight:700;cursor:pointer;font-family:'Tajawal',sans-serif;transition:all .2s}
+.btn-student-logout:hover{background:var(--red);color:#fff}
+
+/* Admin students management card */
+.students-list-admin{display:flex;flex-direction:column;gap:.6rem;margin-top:.8rem;max-height:300px;overflow-y:auto}
+.student-item-admin{
+  background:var(--dark2);border:1px solid var(--border);border-radius:8px;
+  padding:.6rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem;
+}
+.student-item-info{display:flex;flex-direction:column;gap:.15rem}
+.student-item-name{font-size:.88rem;font-weight:700;color:var(--text)}
+.student-item-stage{font-size:.72rem;color:var(--muted)}
+.btn-del-student{background:rgba(255,95,109,.08);border:1px solid rgba(255,95,109,.2);
+  color:var(--red);width:28px;height:28px;border-radius:6px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:all .2s;flex-shrink:0}
+.btn-del-student:hover{background:rgba(255,95,109,.2)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:1000;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:20px;width:100%;max-width:760px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 80px rgba(0,0,0,.7)}
+.modal-head{padding:1.4rem 1.8rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-shrink:0}
+.modal-head h3{font-family:'Cairo',sans-serif;font-size:1.15rem;font-weight:900;color:var(--gold)}
+.modal-close{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.modal-close:hover{background:rgba(255,95,109,.15);border-color:rgba(255,95,109,.4);color:var(--red)}
+.modal-body{padding:1.6rem 1.8rem;overflow-y:auto;flex:1}
+
+/* ADD VIDEO / SESSION FORM */
+.add-video-box{background:var(--dark);border:1px dashed rgba(245,200,66,.25);border-radius:14px;padding:1.4rem;margin-bottom:1.6rem}
+.add-video-box h4{font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:800;color:var(--gold);margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem}
+.form-row{display:grid;grid-template-columns:1fr;gap:.8rem;margin-bottom:.8rem}
+.form-row.two{grid-template-columns:1fr 1fr}
+.form-group label{display:block;font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:.4rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.65rem .9rem;color:var(--text);font-family:'Tajawal',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;direction:ltr}
+.form-group input[type="text"],.form-group textarea{direction:rtl}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold)}
+.form-group select option{background:var(--surface);color:var(--text)}
+.form-group textarea{resize:vertical;min-height:60px}
+.platform-btns{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.8rem}
+.platform-btn{padding:.5rem 1.1rem;border-radius:8px;font-family:'Tajawal',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--muted);transition:all .2s;display:flex;align-items:center;gap:.4rem}
+.platform-btn.yt{--pc:#ff4444}
+.platform-btn.fb{--pc:#1877f2}
+.platform-btn.zm{--pc:#2d8cff}
+.platform-btn.lk{--pc:#4285f4}
+.platform-btn.active,.platform-btn:hover{border-color:var(--pc);color:var(--pc);background:rgba(0,0,0,.3)}
+.btn-add-video{background:linear-gradient(135deg,var(--teal),#00a88a);color:#000;border:none;padding:.65rem 1.6rem;border-radius:8px;font-family:'Cairo',sans-serif;font-size:.9rem;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.5rem}
+.btn-add-video:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,212,170,.3)}
+
+/* VIDEO LIST */
+.videos-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+.videos-header h4{font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:800;color:var(--text)}
+.videos-count{background:rgba(245,200,66,.15);color:var(--gold);font-size:.75rem;font-weight:800;padding:.2rem .7rem;border-radius:20px}
+.videos-list{display:flex;flex-direction:column;gap:.9rem}
+.video-item{background:var(--dark);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;display:flex;gap:1rem;align-items:flex-start;transition:border-color .2s;position:relative}
+.video-item:hover{border-color:rgba(245,200,66,.25)}
+.video-thumb{width:80px;height:54px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.8rem;overflow:hidden;position:relative}
+.video-thumb img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.video-thumb .thumb-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;border-radius:8px}
+.video-info{flex:1;min-width:0}
+.video-title{font-weight:800;font-size:.9rem;margin-bottom:.3rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.video-meta{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.video-platform{font-size:.72rem;font-weight:700;padding:.15rem .6rem;border-radius:5px}
+.video-platform.yt{background:rgba(255,68,68,.15);color:#ff4444;border:1px solid rgba(255,68,68,.2)}
+.video-platform.fb{background:rgba(24,119,242,.15);color:#4a90e2;border:1px solid rgba(24,119,242,.2)}
+.video-platform.lk{background:rgba(66,133,244,.15);color:#4285f4;border:1px solid rgba(66,133,244,.2)}
+.video-desc{font-size:.78rem;color:var(--muted);margin-top:.3rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.video-actions{display:flex;gap:.4rem;flex-shrink:0}
+.btn-watch{background:rgba(245,200,66,.1);border:1px solid var(--border);color:var(--gold);padding:.35rem .8rem;border-radius:7px;font-size:.78rem;font-weight:700;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:.3rem;transition:all .2s;font-family:'Tajawal',sans-serif}
+.btn-watch:hover{background:var(--gold);color:#000}
+.btn-del{background:rgba(255,95,109,.08);border:1px solid rgba(255,95,109,.2);color:var(--red);width:30px;height:30px;border-radius:7px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:all .2s}
+.btn-del:hover{background:rgba(255,95,109,.2)}
+.empty-state{text-align:center;padding:3rem 1rem;color:var(--muted)}
+.empty-state .empty-icon{font-size:3rem;margin-bottom:1rem;opacity:.5}
+.empty-state p{font-size:.9rem}
+
+/* EMBED PREVIEW */
+.embed-preview{background:var(--dark);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-top:1rem;display:none}
+.embed-preview.show{display:block}
+.embed-preview iframe{width:100%;height:220px;border:none;border-radius:8px}
+.embed-label{font-size:.75rem;color:var(--muted);margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem}
+
+
+/* VIDEO PLAYER MODAL */
+.video-modal-overlay{position:fixed;inset:0;z-index:6000;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;visibility:hidden;transition:all .3s}
+.video-modal-overlay.open{opacity:1;visibility:visible}
+.video-modal-box{background:var(--surface);border:1px solid var(--border);border-radius:18px;width:100%;max-width:820px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.8);transform:scale(.95);transition:transform .3s}
+.video-modal-overlay.open .video-modal-box{transform:scale(1)}
+.video-modal-head{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.3rem;border-bottom:1px solid var(--border)}
+.video-modal-title{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:800;color:var(--text);flex:1;margin-left:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.video-modal-close{background:rgba(255,95,109,.1);border:1px solid rgba(255,95,109,.2);color:var(--red);width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.video-modal-close:hover{background:var(--red);color:#fff}
+.video-modal-player{position:relative;width:100%;padding-bottom:56.25%;background:#000}
+.video-modal-player iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.video-modal-footer{padding:.8rem 1.3rem;display:flex;align-items:center;gap:.7rem}
+.video-modal-ext{font-size:.78rem;color:var(--muted);flex:1}
+
+/* NOTIFICATIONS */
+.notif{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.8rem;font-size:.88rem;font-weight:700;z-index:5000;display:none;align-items:center;gap:.6rem;box-shadow:0 8px 40px rgba(0,0,0,.6);white-space:nowrap;max-width:90vw}
+.notif.show{display:flex;animation:slideUp .35s ease}
+@keyframes slideUp{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
+
+/* ====== SITE LINKS SECTION ====== */
+.sitelinks-section{position:relative;z-index:1;max-width:1200px;margin:2.5rem auto 1rem;padding:0 2rem}
+.sitelinks-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;flex-wrap:wrap;gap:.8rem}
+.sitelinks-title{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:800;color:var(--muted);display:flex;align-items:center;gap:.6rem}
+.sitelinks-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.sitelinks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+.sitelink-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1.3rem;display:flex;align-items:center;gap:.9rem;text-decoration:none;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
+.sitelink-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 10px 32px rgba(0,0,0,.35)}
+.sitelink-icon{width:44px;height:44px;border-radius:12px;background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.sitelink-info{flex:1;min-width:0}
+.sitelink-name{font-family:'Cairo',sans-serif;font-size:.92rem;font-weight:800;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sitelink-url{font-size:.72rem;color:var(--muted);margin-top:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:ltr;text-align:right}
+.sitelink-arrow{font-size:.8rem;color:var(--muted);flex-shrink:0;transition:color .2s}
+.sitelink-card:hover .sitelink-arrow{color:var(--gold)}
+.btn-del-sitelink{position:absolute;top:.5rem;left:.5rem;background:rgba(255,95,109,.08);border:1px solid rgba(255,95,109,.2);color:var(--red);width:24px;height:24px;border-radius:6px;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:.75rem;transition:all .2s}
+.btn-del-sitelink:hover{background:rgba(255,95,109,.2)}
+body.admin-mode .btn-del-sitelink{display:flex}
+.sitelinks-empty{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.88rem;background:var(--surface);border:1px dashed var(--border);border-radius:14px}
+
+/* Add sitelink form */
+.add-sitelink-box{background:var(--dark);border:1px dashed rgba(245,200,66,.25);border-radius:14px;padding:1.3rem;margin-bottom:1.4rem;display:none}
+body.admin-mode .add-sitelink-box{display:block}
+.add-sitelink-box h4{font-family:'Cairo',sans-serif;font-size:.92rem;font-weight:800;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.sitelink-form-row{display:grid;grid-template-columns:1fr 1fr auto;gap:.7rem;align-items:end}
+.sitelink-form-row .form-group{margin:0}
+@media(max-width:700px){.sitelink-form-row{grid-template-columns:1fr}.sitelinks-grid{grid-template-columns:1fr 1fr}}
+
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid var(--border);background:var(--surface);padding:2rem;text-align:center;margin-top:4rem}
+footer p{color:var(--muted);font-size:.83rem;line-height:1.8}
+footer strong{color:var(--gold)}
+
+body.admin-mode .hero-avatar{cursor:pointer}
+
+/* SCROLL TOP */position:fixed;bottom:2rem;right:2rem;width:46px;height:46px;border-radius:50%;background:var(--gold);color:#000;border:none;display:flex;align-items:center;justify-content:center;font-size:1rem;cursor:pointer;z-index:400;opacity:0;visibility:hidden;transition:all .3s;font-weight:900}
+.scroll-top.show{opacity:1;visibility:visible}
+.scroll-top:hover{background:var(--gold2);transform:translateY(-3px);box-shadow:0 8px 28px rgba(245,200,66,.4)}
+
+/* ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
+.fade-in.visible{opacity:1;transform:none}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* THEMES */
+.prim .grade-num{background:rgba(0,212,170,.15);color:var(--teal)}
+.prep .grade-num{background:rgba(74,143,226,.15);color:var(--blue)}
+.sec .grade-num{background:rgba(155,108,247,.15);color:var(--purple)}
+.prim .grade-header-icon{background:rgba(0,212,170,.12)}
+.prep .grade-header-icon{background:rgba(74,143,226,.12)}
+.sec .grade-header-icon{background:rgba(155,108,247,.12)}
+
+/* SECTION HEADER */
+.section-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap}
+.section-hd h2{font-family:'Cairo',sans-serif;font-size:1.3rem;font-weight:900}
+.btn-add-item{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:.5rem 1.2rem;border-radius:8px;font-family:'Cairo',sans-serif;font-size:.85rem;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;transition:all .2s}
+.btn-add-item:hover{transform:translateY(-1px);box-shadow:0 5px 20px rgba(245,200,66,.3)}
+.admin-only{display:none}
+body.admin-mode .admin-only{display:flex}
+body.admin-mode .admin-only-block{display:block !important}
+/* edit-overlay is admin-only but uses opacity not display */
+.hero-avatar .edit-overlay.admin-only{display:flex;opacity:0}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .nav-inner{padding:.75rem 1rem}
+  .hero{padding:3rem 1rem 2rem}
+  .sections-nav,.grade-section,.page-content{padding:0 1rem}
+  .grades-grid,.sessions-grid,.schedule-grid,.admin-sections{grid-template-columns:1fr}
+  .form-row.two{grid-template-columns:1fr}
+  .modal{border-radius:16px 16px 0 0;max-height:95vh;position:fixed;bottom:0;left:0;right:0;max-width:100%}
+  .modal-overlay{align-items:flex-end;padding:0}
+  .hero-stats{gap:1.5rem}
+  .stage-tab{padding:.6rem 1.1rem;font-size:.82rem}
+  .contact-strip-inner{gap:.8rem}
+  .contact-edit-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<!-- STUDENT LOGIN SCREEN -->
+<div id="studentLoginScreen">
+  <div class="login-card">
+    <div class="login-avatar">
+      <span id="loginAvatarEmoji">👨‍🏫</span>
+      <img id="loginAvatarImg" style="display:none" src="" alt="avatar">
+    </div>
+    <div class="login-title" id="loginTitle">مستر عمر الورداني</div>
+    <div class="login-subtitle">أدخل بياناتك للوصول إلى المحتوى التعليمي الخاص بمرحلتك</div>
+    <div class="login-field">
+      <label>اسم المستخدم</label>
+      <input type="text" id="studentUsername" placeholder="أدخل اسم المستخدم" autocomplete="username">
+    </div>
+    <div class="login-field">
+      <label>كلمة المرور</label>
+      <input type="password" id="studentPassword" placeholder="••••••••" autocomplete="current-password"
+        onkeydown="if(event.key==='Enter')studentLogin()">
+    </div>
+    <button class="btn-login-student" onclick="studentLogin()">🔓 دخول</button>
+    <div class="login-error" id="loginError">❌ اسم المستخدم أو كلمة المرور غير صحيحة</div>
+    <div class="login-admin-link" onclick="goAdminLogin()">🔐 دخول كأدمن</div>
+  </div>
+</div>
+
+<!-- STUDENT INFO BAR -->
+<div id="studentBar">
+  <div class="student-info-bar">
+    <span>👤</span>
+    <span id="studentBarName">الطالب</span>
+    <span style="color:var(--muted);font-weight:400">|</span>
+    <span id="studentBarStage" style="color:var(--teal)"></span>
+  </div>
+  <button class="btn-student-logout" onclick="studentLogout()">🚪 تسجيل الخروج</button>
+</div>
+
+
+<div id="loader">
+  <div class="loader-ring"></div>
+  <div class="loader-text">English With Mr. Omar El-Wardany</div>
+  <div class="loader-sub">🎓 منصة تعليمية مجانية</div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="nav-inner">
+    <a class="logo" href="#" onclick="switchPage('home');return false;">
+      <div class="logo-icon" id="logoIconWrap">
+        <span id="logoEmoji">🎓</span>
+        <img id="logoImg" style="display:none" src="" alt="logo">
+      </div>
+      <div id="logoText">مستر عمر <span>الورداني</span></div>
+    </a>
+    <div class="nav-right">
+
+      <button class="nav-btn admin-btn admin-only" id="adminNavBtn" onclick="switchPage('admin')">🔐 الإدارة</button>
+      <button class="admin-logout admin-only" onclick="adminLogout()">خروج</button>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE NAV -->
+<div class="page-nav">
+  <div class="page-nav-inner">
+    <button class="page-tab active" data-page="home" onclick="switchPage('home')">🏠 الرئيسية</button>
+
+    <button class="page-tab" data-page="sessions" onclick="switchPage('sessions')">📡 حصص أونلاين</button>
+    <button class="page-tab" data-page="contact" onclick="switchPage('contact')">📞 تواصل معنا</button>
+    <button class="page-tab" data-page="admin" onclick="switchPage('admin')">⚙️ لوحة الإدارة</button>
+  </div>
+</div>
+
+<!-- ===================== PAGE: HOME ===================== -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge"><span class="live-dot"></span> منصة تعليمية مجانية — اللغة الإنجليزية</div>
+    <div class="hero-avatar" id="heroAvatarWrap">
+      <span id="heroAvatarEmoji">👨‍🏫</span>
+      <img id="heroAvatarImg" style="display:none" src="" alt="avatar">
+      <div class="edit-overlay admin-only">✏️ تغيير الصورة</div>
+    </div>
+    <h1 id="heroTitle">تعلّم الإنجليزية مع<br><em>مستر عمر الورداني</em></h1>
+    <p class="hero-subtitle" id="heroSubtitle">مرحبًا بكم في منصة Mr. Omar Elwerdany التعليمية — منصة تعليمية متخصصة في تدريس اللغة الإنجليزية لطلاب المرحلة الإعدادية والمرحلة الثانوية والصف السادس الابتدائي، تهدف إلى تقديم شرح مبسط ومتميز للمناهج الدراسية، مع توفير تدريبات متنوعة، وامتحانات إلكترونية، ومراجعات شاملة تساعد الطلاب على تحقيق أفضل النتائج والتفوق الدراسي.</p>
+    <ul class="hero-features">
+      <li>✅ شرحًا واضحًا ومبسطًا لجميع الدروس</li>
+      <li>✅ تدريبات وواجبات تفاعلية</li>
+      <li>✅ اختبارات دورية لقياس مستوى التقدم</li>
+      <li>✅ مراجعات نهائية شاملة قبل الامتحانات</li>
+      <li>✅ متابعة مستمرة ودعم للطلاب</li>
+    </ul>
+    <p class="hero-slogan">معًا نحو تعلم أفضل ومستقبل أكثر نجاحًا 🌟</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num" id="totalGrades">12</div><div class="stat-label">صف دراسي</div></div>
+      <div class="stat"><div class="stat-num" id="totalVideos">0</div><div class="stat-label">فيديو تعليمي</div></div>
+      <div class="stat"><div class="stat-num" id="totalSessions">0</div><div class="stat-label">حصة أونلاين</div></div>
+    </div>
+  </div>
+
+  <!-- CONTACT STRIP -->
+  <div class="contact-strip">
+    <div class="contact-strip-inner" id="contactStrip">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <!-- STAGE TABS -->
+  <div class="sections-nav">
+    <div class="sections-title">📚 اختر المرحلة الدراسية</div>
+    <div class="stage-tabs">
+      <button class="stage-tab active" onclick="showStage('primary',this)">
+        <span>🏫</span> المرحلة الابتدائية <span class="tab-count">صف واحد</span>
+      </button>
+      <button class="stage-tab" onclick="showStage('prep',this)">
+        <span>📖</span> المرحلة الإعدادية <span class="tab-count">3 صفوف</span>
+      </button>
+      <button class="stage-tab" onclick="showStage('secondary',this)">
+        <span>🎓</span> المرحلة الثانوية <span class="tab-count">3 صفوف</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PRIMARY -->
+  <div class="grade-section prim active" id="sec-primary">
+    <div class="grade-header fade-in">
+      <div class="grade-header-icon">🏫</div>
+      <div><h2>المرحلة الابتدائية</h2><p>الصف السادس الابتدائي</p></div>
+    </div>
+    <div class="grades-grid" id="grid-primary"></div>
+  </div>
+
+  <!-- PREP -->
+  <div class="grade-section prep" id="sec-prep">
+    <div class="grade-header fade-in">
+      <div class="grade-header-icon">📖</div>
+      <div><h2>المرحلة الإعدادية</h2><p>من الصف الأول إلى الصف الثالث الإعدادي</p></div>
+    </div>
+    <div class="grades-grid" id="grid-prep"></div>
+  </div>
+
+  <!-- SECONDARY -->
+  <div class="grade-section sec" id="sec-secondary">
+    <div class="grade-header fade-in">
+      <div class="grade-header-icon">🎓</div>
+      <div><h2>المرحلة الثانوية</h2><p>من الصف الأول إلى الصف الثالث الثانوي</p></div>
+    </div>
+    <div class="grades-grid" id="grid-secondary"></div>
+  </div>
+
+  <!-- SUMMER COURSE CARD -->
+  <div class="summer-home-card" id="summerHomeCard" onclick="switchPage('summer')" style="cursor:pointer;margin:1.2rem 1rem;background:linear-gradient(135deg,rgba(255,180,0,.08),rgba(255,100,0,.06));border:1.5px solid rgba(255,180,0,.3);border-radius:18px;padding:1.3rem 1.5rem;display:flex;align-items:center;gap:1.1rem;transition:all .3s">
+    <div style="font-size:2.5rem;flex-shrink:0">☀️</div>
+    <div style="flex:1">
+      <div style="font-family:'Cairo',sans-serif;font-size:1.1rem;font-weight:900;color:#ffd700">الكورس الصيفي</div>
+      <div style="font-size:.82rem;color:var(--muted);margin-top:.25rem">فيديوهات وروابط لجميع المراحل الدراسية</div>
+    </div>
+    <div style="font-size:1.4rem;color:#ffd700">←</div>
+  </div>
+
+  <!-- SITE LINKS SECTION -->
+  <div class="sitelinks-section">
+    <div class="sitelinks-header">
+      <div class="sitelinks-title" style="flex:1">🌐 روابط مواقع مفيدة</div>
+      <button class="btn-add-item admin-only" onclick="openAddSitelinkForm()">➕ أضف رابط</button>
+    </div>
+    <!-- Add form (admin only) -->
+    <div class="add-sitelink-box" id="addSitelinkBox">
+      <h4>➕ إضافة رابط موقع جديد</h4>
+      <div class="sitelink-form-row">
+        <div class="form-group">
+          <label>اسم الموقع *</label>
+          <input type="text" id="slName" placeholder="مثال: موقع وزارة التربية">
+        </div>
+        <div class="form-group">
+          <label>رابط الموقع *</label>
+          <input type="text" id="slUrl" placeholder="https://..." dir="ltr">
+        </div>
+        <button class="btn-add-video" style="white-space:nowrap;height:38px;padding:.4rem 1rem" onclick="addSitelink()">✅ إضافة</button>
+      </div>
+      <div class="form-group" style="margin-top:.7rem">
+        <label>أيقونة (اختياري — إيموجي واحد)</label>
+        <input type="text" id="slIcon" placeholder="🌐" style="max-width:100px">
+      </div>
+    </div>
+    <!-- Links grid -->
+    <div class="sitelinks-grid" id="sitelinksGrid">
+      <div class="sitelinks-empty" id="sitelinksEmpty">لا توجد روابط بعد — يمكن للأدمن إضافتها</div>
+    </div>
+  </div>
+
+</div><!-- /page-home -->
+
+<!-- ===================== PAGE: SUMMER ===================== -->
+<div class="page" id="page-summer">
+  <div class="page-content">
+    <div class="page-title">&#x2600;&#xFE0F; <em>الكورس الصيفي</em></div>
+    <p class="page-desc">محتوى الكورس الصيفي لجميع المراحل الدراسية — فيديوهات وروابط مفيدة</p>
+
+    <!-- SUMMER STAGE TABS -->
+    <div style="display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:2rem">
+      <button class="stage-tab active" id="sumTab-primary" onclick="showSummerStage('primary',this)">🏫 المرحلة الابتدائية</button>
+      <button class="stage-tab" id="sumTab-prep" onclick="showSummerStage('prep',this)">📖 المرحلة الإعدادية</button>
+      <button class="stage-tab" id="sumTab-secondary" onclick="showSummerStage('secondary',this)">🎓 المرحلة الثانوية</button>
+    </div>
+
+    <!-- PRIMARY -->
+    <div class="summer-stage active" id="sum-primary">
+      <div class="grade-header" style="margin-bottom:1.5rem">
+        <div class="grade-header-icon" style="background:rgba(0,212,170,.12)">🏫</div>
+        <div><h2 style="font-family:Cairo,sans-serif;font-size:1.3rem;font-weight:900">المرحلة الابتدائية</h2><p style="font-size:.85rem;color:var(--muted)">كورس صيفي للصف السادس الابتدائي</p></div>
+      </div>
+      <div id="sumVideos-primary" class="videos-list" style="margin-bottom:2rem"></div>
+      <div style="font-family:Cairo,sans-serif;font-size:.95rem;font-weight:800;color:var(--muted);display:flex;align-items:center;gap:.6rem;margin-bottom:1rem">🌐 روابط مفيدة — الابتدائي<span style="flex:1;height:1px;background:var(--border);display:block"></span></div>
+      <div id="sumLinks-primary" class="sitelinks-grid"></div>
+    </div>
+
+    <!-- PREP -->
+    <div class="summer-stage" id="sum-prep" style="display:none">
+      <div class="grade-header" style="margin-bottom:1.5rem">
+        <div class="grade-header-icon" style="background:rgba(74,143,226,.12)">📖</div>
+        <div><h2 style="font-family:Cairo,sans-serif;font-size:1.3rem;font-weight:900">المرحلة الإعدادية</h2><p style="font-size:.85rem;color:var(--muted)">كورس صيفي للمرحلة الإعدادية</p></div>
+      </div>
+      <div id="sumVideos-prep" class="videos-list" style="margin-bottom:2rem"></div>
+      <div style="font-family:Cairo,sans-serif;font-size:.95rem;font-weight:800;color:var(--muted);display:flex;align-items:center;gap:.6rem;margin-bottom:1rem">🌐 روابط مفيدة — الإعدادي<span style="flex:1;height:1px;background:var(--border);display:block"></span></div>
+      <div id="sumLinks-prep" class="sitelinks-grid"></div>
+    </div>
+
+    <!-- SECONDARY -->
+    <div class="summer-stage" id="sum-secondary" style="display:none">
+      <div class="grade-header" style="margin-bottom:1.5rem">
+        <div class="grade-header-icon" style="background:rgba(155,108,247,.12)">🎓</div>
+        <div><h2 style="font-family:Cairo,sans-serif;font-size:1.3rem;font-weight:900">المرحلة الثانوية</h2><p style="font-size:.85rem;color:var(--muted)">كورس صيفي للمرحلة الثانوية</p></div>
+      </div>
+      <div id="sumVideos-secondary" class="videos-list" style="margin-bottom:2rem"></div>
+      <div style="font-family:Cairo,sans-serif;font-size:.95rem;font-weight:800;color:var(--muted);display:flex;align-items:center;gap:.6rem;margin-bottom:1rem">🌐 روابط مفيدة — الثانوي<span style="flex:1;height:1px;background:var(--border);display:block"></span></div>
+      <div id="sumLinks-secondary" class="sitelinks-grid"></div>
+    </div>
+
+    <!-- ADMIN ADD FORM -->
+    <div class="add-video-box" id="sumAdminBox" style="display:none;margin-top:2rem">
+      <h4>➕ إضافة محتوى للكورس الصيفي</h4>
+      <div class="form-row two">
+        <div class="form-group">
+          <label>المرحلة</label>
+          <select id="sumStage">
+            <option value="primary">الابتدائية</option>
+            <option value="prep">الإعدادية</option>
+            <option value="secondary">الثانوية</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>نوع المحتوى</label>
+          <select id="sumType">
+            <option value="video">فيديو (يوتيوب / فيسبوك)</option>
+            <option value="link">رابط موقع</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>العنوان *</label>
+          <input type="text" id="sumTitle" placeholder="عنوان الفيديو أو الموقع">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>الرابط *</label>
+          <input type="text" id="sumUrl" placeholder="https://..." dir="ltr">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>أيقونة (اختياري — للروابط فقط)</label>
+          <input type="text" id="sumIcon" placeholder="🌐" style="max-width:100px">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>وصف (اختياري)</label>
+          <textarea id="sumDesc" placeholder="وصف مختصر..."></textarea>
+        </div>
+      </div>
+      <button class="btn-add-video" onclick="addSummerItem()">✅ إضافة</button>
+    </div>
+
+    <div style="margin-top:1.5rem">
+      <button class="btn-add-item admin-only" onclick="document.getElementById('sumAdminBox').style.display='block';document.getElementById('sumAdminBox').scrollIntoView({behavior:'smooth'})">➕ أضف محتوى صيفي</button>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ===================== PAGE: SESSIONS ===================== -->
+<div class="page" id="page-sessions">
+  <div class="page-content">
+    <div class="section-hd">
+      <div>
+        <div class="page-title">📡 <em>حصص أونلاين</em></div>
+        <p class="page-desc">انضم للحصص المباشرة عبر يوتيوب أو فيسبوك أو زوم</p>
+      </div>
+      <button class="btn-add-item admin-only" onclick="openSessionModal()">➕ أضف حصة</button>
+    </div>
+    <div class="sessions-grid" id="sessionsGrid">
+      <div class="empty-state" style="grid-column:1/-1">
+        <div class="empty-icon">📡</div>
+        <p>لا توجد حصص أونلاين بعد<br><span style="font-size:.8rem;opacity:.6">سيتم إضافة الحصص قريباً</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: CONTACT ===================== -->
+<div class="page" id="page-contact">
+  <div class="page-content">
+    <div class="page-title">📞 <em>تواصل معنا</em></div>
+    <p class="page-desc">يمكنك التواصل مع مستر عمر عبر القنوات التالية</p>
+    <div class="admin-sections" id="contactCards"></div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: ADMIN ===================== -->
+<div class="page" id="page-admin">
+  <div class="page-content">
+
+    <!-- LOGIN FORM -->
+    <div class="admin-login" id="adminLoginBox">
+      <h2>🔐 لوحة الإدارة</h2>
+      <p>أدخل كلمة المرور للوصول إلى لوحة التحكم</p>
+      <div class="admin-row">
+        <label>كلمة المرور</label>
+        <input type="password" id="adminPassInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')adminLogin()">
+      </div>
+      <button class="btn-save" style="width:100%;justify-content:center;margin-top:.5rem" onclick="adminLogin()">🔓 دخول</button>
+
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="adminPanelBox" style="display:none">
+      <div class="section-hd">
+        <div class="page-title">⚙️ <em>لوحة الإدارة</em></div>
+        <button class="admin-logout" onclick="adminLogout()">🚪 خروج</button>
+      </div>
+
+      <div class="admin-sections">
+
+        <!-- LOGO & BRAND -->
+        <div class="admin-card">
+          <h3>🎨 الشعار والهوية</h3>
+          <div class="admin-row">
+            <label>شعار الموقع (لوجو)</label>
+            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.8rem">
+              <img id="adminLogoPreview" class="logo-preview" src="" style="display:none" alt="logo">
+              <span id="adminLogoEmoji" style="font-size:2rem">🎓</span>
+            </div>
+            <div class="upload-area">
+              <input type="file" accept="image/*" onchange="uploadLogo(this)">
+              <div>📁 ارفع صورة الشعار</div>
+              <p>PNG, JPG, SVG مقبولة</p>
+            </div>
+            <button class="btn-danger" style="margin-top:.6rem;font-size:.75rem;padding:.35rem .8rem" onclick="removeLogo()">🗑 إزالة الشعار</button>
+          </div>
+          <div class="admin-row">
+            <label>اسم المنصة (السطر الأول)</label>
+            <input type="text" id="adminLogoText1" value="مستر عمر" placeholder="مستر عمر">
+          </div>
+          <div class="admin-row">
+            <label>اسم المنصة (السطر الثاني / ملون)</label>
+            <input type="text" id="adminLogoText2" value="الورداني" placeholder="الورداني">
+          </div>
+          <button class="btn-save" onclick="saveBrand()">💾 حفظ الهوية</button>
+        </div>
+
+        <!-- HERO SECTION -->
+        <div class="admin-card">
+          <h3>🖼 الصورة الشخصية والنص الرئيسي</h3>
+          <div class="admin-row">
+            <label>الصورة الشخصية للمعلم</label>
+            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.8rem">
+              <img id="adminAvatarPreview" class="avatar-preview" src="" style="display:none" alt="avatar">
+              <span id="adminAvatarEmoji" style="font-size:2.5rem">👨‍🏫</span>
+            </div>
+            <div class="upload-area">
+              <input type="file" accept="image/*" onchange="uploadAvatar(this)">
+              <div>📁 ارفع صورة شخصية</div>
+              <p>سيظهر فوراً في الصفحة الرئيسية</p>
+            </div>
+            <button class="btn-danger" style="margin-top:.6rem;font-size:.75rem;padding:.35rem .8rem" onclick="removeAvatar()">🗑 إزالة الصورة</button>
+          </div>
+          <div class="admin-row">
+            <label>العنوان الرئيسي</label>
+            <input type="text" id="adminHeroTitle" value="تعلّم الإنجليزية مع" placeholder="تعلّم الإنجليزية مع">
+          </div>
+          <div class="admin-row">
+            <label>الاسم (الجزء المميز)</label>
+            <input type="text" id="adminHeroName" value="مستر عمر الورداني" placeholder="مستر عمر الورداني">
+          </div>
+          <div class="admin-row">
+            <label>النص التوضيحي</label>
+            <textarea id="adminHeroSubtitle">مرحبًا بكم في منصة Mr. Omar Elwerdany التعليمية — منصة تعليمية متخصصة في تدريس اللغة الإنجليزية لطلاب المرحلة الإعدادية والمرحلة الثانوية والصف السادس الابتدائي، تهدف إلى تقديم شرح مبسط ومتميز للمناهج الدراسية، مع توفير تدريبات متنوعة، وامتحانات إلكترونية، ومراجعات شاملة تساعد الطلاب على تحقيق أفضل النتائج والتفوق الدراسي.</textarea>
+          </div>
+          <button class="btn-save" onclick="saveHero()">💾 حفظ النصوص</button>
+        </div>
+
+        <!-- CONTACT INFO -->
+        <div class="admin-card" style="grid-column:span 1">
+          <h3>📞 معلومات التواصل</h3>
+          <div class="contact-edit-grid">
+            <div class="admin-row">
+              <label>📱 رقم الهاتف</label>
+              <input type="text" id="ci_phone" placeholder="+20 1XX XXX XXXX" dir="ltr">
+            </div>
+            <div class="admin-row">
+              <label>💬 واتساب</label>
+              <input type="text" id="ci_whatsapp" placeholder="+20 1XX XXX XXXX" dir="ltr">
+            </div>
+            <div class="admin-row">
+              <label>📧 البريد الإلكتروني</label>
+              <input type="text" id="ci_email" placeholder="omar@example.com" dir="ltr">
+            </div>
+            <div class="admin-row">
+              <label>📘 فيسبوك</label>
+              <input type="text" id="ci_facebook" placeholder="https://facebook.com/..." dir="ltr">
+            </div>
+            <div class="admin-row">
+              <label>▶ يوتيوب</label>
+              <input type="text" id="ci_youtube" placeholder="https://youtube.com/..." dir="ltr">
+            </div>
+            <div class="admin-row">
+              <label>📍 رابط الخرائط</label>
+              <input type="text" id="ci_maps" placeholder="https://maps.google.com/..." dir="ltr">
+            </div>
+          </div>
+          <div class="admin-row" style="margin-top:.5rem">
+            <label>🏠 العنوان</label>
+            <input type="text" id="ci_address" placeholder="القاهرة، مصر">
+          </div>
+          <button class="btn-save" onclick="saveContact()">💾 حفظ معلومات التواصل</button>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="admin-card">
+          <h3>🔑 تغيير كلمة المرور</h3>
+          <div class="admin-row">
+            <label>كلمة المرور الجديدة</label>
+            <input type="password" id="newPass1" placeholder="••••••••">
+          </div>
+          <div class="admin-row">
+            <label>تأكيد كلمة المرور</label>
+            <input type="password" id="newPass2" placeholder="••••••••">
+          </div>
+          <button class="btn-save" onclick="changePassword()">🔐 تغيير كلمة المرور</button>
+        </div>
+
+        <!-- SESSIONS MANAGEMENT -->
+        <div class="admin-card" style="grid-column:span 1">
+          <h3>📡 إدارة الحصص الأونلاين</h3>
+          <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">أضف أو احذف الحصص المباشرة من هنا أو من صفحة الحصص مباشرة</p>
+          <button class="btn-save" onclick="switchPage('sessions');openSessionModal()">➕ إضافة حصة جديدة</button>
+        </div>
+
+        <!-- STUDENTS MANAGEMENT -->
+        <div class="admin-card" style="grid-column:1/-1">
+          <h3>👥 إدارة حسابات الطلاب</h3>
+          <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">أضف حسابات للطلاب وحدد المرحلة الدراسية لكل طالب. سيرى الطالب مرحلته فقط عند تسجيل الدخول.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:.7rem;align-items:end;margin-bottom:1rem">
+            <div class="admin-row" style="margin:0">
+              <label>اسم المستخدم</label>
+              <input type="text" id="newStudentUser" placeholder="مثال: ahmed2025" dir="ltr">
+            </div>
+            <div class="admin-row" style="margin:0">
+              <label>كلمة المرور</label>
+              <input type="password" id="newStudentPass" placeholder="••••••••">
+            </div>
+            <div class="admin-row" style="margin:0">
+              <label>المرحلة الدراسية</label>
+              <select id="newStudentStage" onchange="updateGradeOptions()">
+                <option value="primary">🏫 الابتدائية</option>
+                <option value="prep">📖 الإعدادية</option>
+                <option value="secondary">🎓 الثانوية</option>
+                <option value="summer">☀️ الكورس الصيفي</option>
+              </select>
+            </div>
+            <div class="admin-row" style="margin:0">
+              <label>الصف الدراسي</label>
+              <select id="newStudentGrade">
+                <option value="g6">الصف السادس الابتدائي</option>
+              </select>
+            </div>
+            <button class="btn-save" style="height:38px;padding:.4rem 1rem;white-space:nowrap" onclick="addStudent()">➕ إضافة</button>
+          </div>
+          <div class="students-list-admin" id="studentsListAdmin">
+            <div style="font-size:.82rem;color:var(--muted);text-align:center;padding:.8rem">لا يوجد طلاب بعد</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <strong id="footerName">English With Mr. Omar El-Wardany</strong></p>
+  <p>منصة تعليمية مجانية لجميع المراحل الدراسية · اللغة الإنجليزية · المنهج المصري</p>
+  <p style="margin-top:.5rem;font-size:.75rem;color:var(--muted)">بُني بـ ❤️ لخدمة أبناء مصر 🇪🇬</p>
+</footer>
+
+<!-- NOTIFICATION -->
+<div class="notif" id="notif"><span id="notifIcon">✅</span><span id="notifText">تم!</span></div>
+
+<!-- SCROLL TOP -->
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲</button>
+
+
+<!-- VIDEO PLAYER MODAL -->
+<div class="video-modal-overlay" id="videoPlayerModal" onclick="if(event.target===this)closeVideoPlayer()">
+  <div class="video-modal-box" onclick="event.stopPropagation()">
+    <div class="video-modal-head">
+      <span id="videoPlayerPlatformIcon" style="font-size:1.2rem">▶</span>
+      <div class="video-modal-title" id="videoPlayerTitle">عنوان الفيديو</div>
+      <button class="video-modal-close" onclick="closeVideoPlayer()">✕</button>
+    </div>
+    <div class="video-modal-player">
+      <iframe id="videoPlayerFrame" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+    </div>
+    <div class="video-modal-footer">
+      <span class="video-modal-ext">🎬 الفيديو يشتغل من سيرفرات يوتيوب/فيسبوك مباشرة</span>
+      <a id="videoPlayerExtLink" href="#" target="_blank" rel="noopener" class="btn-watch" style="font-size:.78rem">↗ فتح خارجي</a>
+    </div>
+  </div>
+</div>
+
+<!-- GRADE MODAL -->
+<div class="modal-overlay" id="gradeModal" onclick="closeModal(event,'gradeModal')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <div>
+        <h3 id="modalTitle">الصف الأول الابتدائي</h3>
+        <div style="font-size:.78rem;color:var(--muted);margin-top:.2rem" id="modalSub"></div>
+      </div>
+      <button class="modal-close" onclick="closeGradeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="add-video-box" id="addVideoBox">
+        <h4>➕ أضف فيديو تعليمي</h4>
+        <div class="platform-btns">
+          <button class="platform-btn yt active" id="pbYT" onclick="selectPlatform('youtube')">▶ يوتيوب</button>
+          <button class="platform-btn fb" id="pbFB" onclick="selectPlatform('facebook')">f فيسبوك</button>
+          <button class="platform-btn lk" id="pbLK" onclick="selectPlatform('link')">📋 جوجل فورم</button>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>عنوان الفيديو *</label>
+            <input type="text" id="vidTitle" placeholder="مثال: درس Colours — الألوان بالإنجليزية">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label id="urlLabel">رابط الفيديو من يوتيوب *</label>
+            <input type="text" id="vidUrl" placeholder="https://www.youtube.com/watch?v=..." oninput="previewEmbed()">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>وصف مختصر (اختياري)</label>
+            <textarea id="vidDesc" placeholder="مثال: شرح وحدة الألوان كاملة مع التدريبات"></textarea>
+          </div>
+        </div>
+        <div class="embed-preview" id="embedPreview">
+          <div class="embed-label">👁 معاينة الفيديو</div>
+          <iframe id="embedFrame" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+        <button class="btn-add-video" onclick="addVideo()">✅ إضافة الفيديو</button>
+      </div>
+      <div>
+        <div class="videos-header">
+          <h4>🎬 الفيديوهات المضافة</h4>
+          <span class="videos-count" id="vidCount">0 فيديو</span>
+        </div>
+        <div class="videos-list" id="videosList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SESSION MODAL -->
+<div class="modal-overlay" id="sessionModal" onclick="closeModal(event,'sessionModal')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-head">
+      <h3>📡 إضافة حصة أونلاين</h3>
+      <button class="modal-close" onclick="closeModalById('sessionModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="add-video-box">
+        <h4>تفاصيل الحصة</h4>
+        <div class="platform-btns">
+          <button class="platform-btn yt active" id="spbYT" onclick="selectSessionPlatform('youtube')">▶ يوتيوب</button>
+          <button class="platform-btn fb" id="spbFB" onclick="selectSessionPlatform('facebook')">f فيسبوك</button>
+          <button class="platform-btn zm" id="spbZM" onclick="selectSessionPlatform('zoom')">🎥 زوم</button>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>عنوان الحصة *</label>
+            <input type="text" id="sessTitle" placeholder="مثال: حصة مراجعة Unit 3 — الثالث ابتدائي">
+          </div>
+        </div>
+        <div class="form-row two">
+          <div class="form-group">
+            <label>التاريخ والوقت</label>
+            <input type="datetime-local" id="sessDateTime" dir="ltr">
+          </div>
+          <div class="form-group">
+            <label>الحالة</label>
+            <select id="sessStatus">
+              <option value="upcoming">قادمة</option>
+              <option value="live">مباشر الآن 🔴</option>
+              <option value="recorded">مسجلة</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label id="sessUrlLabel">رابط الحصة *</label>
+            <input type="text" id="sessUrl" placeholder="https://www.youtube.com/watch?v=..." dir="ltr">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>وصف الحصة (اختياري)</label>
+            <textarea id="sessDesc" placeholder="تفاصيل عن محتوى الحصة..."></textarea>
+          </div>
+        </div>
+        <button class="btn-add-video" onclick="addSession()">✅ إضافة الحصة</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="module">
+// ============================================================
+// FIREBASE SETUP  (Realtime Database — compat CDN loaded above)
+// ============================================================
+import { initializeApp }                          from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+import { getDatabase, ref, set, get, onValue, remove, update }
+                                                   from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey:            "AIzaSyCrn0G8pNyt4_knx0NpJ16I7_OEuUYGP9I",
+  authDomain:        "omar-platform-a2d88.firebaseapp.com",
+  databaseURL:       "https://omar-platform-a2d88-default-rtdb.firebaseio.com",
+  projectId:         "omar-platform-a2d88",
+  storageBucket:     "omar-platform-a2d88.firebasestorage.app",
+  messagingSenderId: "880096405199",
+  appId:             "1:880096405199:web:be6ef7b1e5702a121a39ba",
+  measurementId:     "G-PJ4W6J86J5"
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getDatabase(app);
+
+// ============================================================
+// DB HELPERS
+// ============================================================
+const dbRef  = path => ref(db, path);
+async function dbSet(path, val){ await set(dbRef(path), val); }
+async function dbGet(path){ const snap = await get(dbRef(path)); return snap.exists() ? snap.val() : null; }
+async function dbRemove(path){ await remove(dbRef(path)); }
+function dbListen(path, cb){ onValue(dbRef(path), snap => cb(snap.exists() ? snap.val() : null)); }
+
+// ============================================================
+// STUDENT AUTH STATE
+// ============================================================
+let currentStudent = null; // { username, stage, grade }
+let students = [];         // array of { id, username, pass, stage, grade }
+
+const STAGE_LABELS = {
+  primary:   '🏫 المرحلة الابتدائية',
+  prep:      '📖 المرحلة الإعدادية',
+  secondary: '🎓 المرحلة الثانوية',
+  summer:    '☀️ الكورس الصيفي'
+};
+
+const GRADE_OPTIONS = {
+  primary:   [{id:'g6',  label:'الصف السادس الابتدائي'}],
+  prep:      [{id:'g7',  label:'الصف الأول الإعدادي'},
+              {id:'g8',  label:'الصف الثاني الإعدادي'},
+              {id:'g9',  label:'الصف الثالث الإعدادي'}],
+  secondary: [{id:'g10', label:'الصف الأول الثانوي'},
+              {id:'g11', label:'الصف الثاني الثانوي'},
+              {id:'g12', label:'الصف الثالث الثانوي'}],
+  summer:    [{id:'sum_primary',   label:'كورس صيفي — الابتدائية'},
+              {id:'sum_prep',      label:'كورس صيفي — الإعدادية'},
+              {id:'sum_secondary', label:'كورس صيفي — الثانوية'}]
+};
+
+function updateGradeOptions(){
+  const stage = document.getElementById('newStudentStage').value;
+  const gradeSelect = document.getElementById('newStudentGrade');
+  gradeSelect.innerHTML = GRADE_OPTIONS[stage].map(g=>`<option value="${g.id}">${g.label}</option>`).join('');
+}
+
+// ============================================================
+// STUDENT LOGIN / LOGOUT
+// ============================================================
+function studentLogin(){
+  const username = document.getElementById('studentUsername').value.trim();
+  const pass     = document.getElementById('studentPassword').value;
+  const errEl    = document.getElementById('loginError');
+
+  if(!username||!pass){ errEl.textContent='⚠️ أدخل اسم المستخدم وكلمة المرور'; errEl.classList.add('show'); return; }
+
+  const found = students.find(s => s.username===username && s.pass===pass);
+  if(!found){ errEl.textContent='❌ اسم المستخدم أو كلمة المرور غير صحيحة'; errEl.classList.add('show'); return; }
+
+  errEl.classList.remove('show');
+  currentStudent = found;
+  sessionStorage.setItem('studentSession', JSON.stringify(found));
+
+  document.getElementById('studentLoginScreen').classList.add('hidden');
+  document.getElementById('studentBar').classList.add('show');
+  document.getElementById('studentBarName').textContent = found.username;
+  const gradeLabel = getGradeLabel(found.grade, found.stage);
+  document.getElementById('studentBarStage').textContent = gradeLabel;
+
+  // Show only student's grade
+  applyStudentGradeFilter(found.stage, found.grade);
+  // If summer student → go directly to summer page
+  if(found.stage === 'summer'){
+    switchPage('summer');
+    // Highlight the correct summer sub-tab based on grade
+    const subStage = found.grade ? found.grade.replace('sum_','') : 'primary';
+    const sumTabEl = document.getElementById('sumTab-'+subStage);
+    if(sumTabEl) showSummerStage(subStage, sumTabEl);
+  } else {
+    switchPage('home');
+  }
+}
+
+function studentLogout(){
+  currentStudent = null;
+  sessionStorage.removeItem('studentSession');
+  document.getElementById('studentBar').classList.remove('show');
+  document.getElementById('studentLoginScreen').classList.remove('hidden');
+  document.getElementById('studentUsername').value='';
+  document.getElementById('studentPassword').value='';
+  document.getElementById('loginError').classList.remove('show');
+  // restore stage tabs & sections
+  removeStudentStageFilter();
+}
+
+function goAdminLogin(){
+  // Hide login screen and go directly to admin page (with its own password)
+  document.getElementById('studentLoginScreen').classList.add('hidden');
+  switchPage('admin');
+  // If not logged in as admin, show admin login box
+  if(!adminMode){
+    document.getElementById('adminLoginBox').style.display='block';
+    document.getElementById('adminPanelBox').style.display='none';
+  }
+}
+
+function getGradeLabel(gradeId, stage){
+  if(!gradeId) return STAGE_LABELS[stage]||stage;
+  const opts = GRADE_OPTIONS[stage]||[];
+  const found = opts.find(g=>g.id===gradeId);
+  return found ? found.label : (STAGE_LABELS[stage]||stage);
+}
+
+function applyStudentGradeFilter(stage, gradeId){
+  // Summer students see only the summer page — filtered to their sub-stage
+  if(stage === 'summer'){
+    document.querySelector('.sections-nav').style.display='none';
+    // Hide summer home card for summer students (they go directly to summer page)
+    const sumCard = document.getElementById('summerHomeCard');
+    if(sumCard) sumCard.style.display='none';
+    // Filter summer stage tabs: show only the student's sub-stage
+    const subStage = gradeId ? gradeId.replace('sum_','') : null;
+    if(subStage){
+      // Hide all summer tabs and stages
+      document.querySelectorAll('#page-summer .stage-tab').forEach(t=>{
+        t.style.display='none';
+      });
+      // Show only the matching tab
+      const matchTab = document.getElementById('sumTab-'+subStage);
+      if(matchTab) matchTab.style.display='';
+      // Hide all summer stage sections
+      document.querySelectorAll('.summer-stage').forEach(s=>s.style.display='none');
+      // Show only the student's stage
+      const matchStage = document.getElementById('sum-'+subStage);
+      if(matchStage) matchStage.style.display='block';
+    }
+    return;
+  }
+  // Hide stage tabs navigation
+  document.querySelector('.sections-nav').style.display='none';
+  // Hide all grade sections
+  document.querySelectorAll('.grade-section').forEach(s=>s.classList.remove('active'));
+  // Show only student's stage section
+  const target = document.getElementById('sec-'+stage);
+  if(target) target.classList.add('active');
+  // Hide all grade cards, show only the student's grade card
+  document.querySelectorAll('.grade-card').forEach(card=>{
+    card.style.display='none';
+  });
+  // Find and show the correct card by re-building only that card
+  if(gradeId){
+    const grid = document.getElementById('grid-'+stage);
+    if(grid){
+      grid.querySelectorAll('.grade-card').forEach((card, idx)=>{
+        const gradesInStage = GRADES[stage];
+        if(gradesInStage && gradesInStage[idx] && gradesInStage[idx].id === gradeId){
+          card.style.display='';
+        }
+      });
+    }
+  }
+}
+
+function removeStudentStageFilter(){
+  document.querySelector('.sections-nav').style.display='';
+  // Restore summer home card
+  const sumCard = document.getElementById('summerHomeCard');
+  if(sumCard) sumCard.style.display='';
+  // Restore all grade cards visibility
+  document.querySelectorAll('.grade-card').forEach(card=>card.style.display='');
+  // Restore default: show primary section
+  document.querySelectorAll('.grade-section').forEach(s=>s.classList.remove('active'));
+  const prim = document.getElementById('sec-primary');
+  if(prim) prim.classList.add('active');
+  document.querySelectorAll('.stage-tab').forEach((t,i)=>{
+    t.classList.toggle('active', i===0);
+  });
+  // Restore all summer stage tabs visibility
+  document.querySelectorAll('#page-summer .stage-tab').forEach(t=>{
+    t.style.display='';
+  });
+  // Restore summer page default state (show primary, activate first tab)
+  document.querySelectorAll('.summer-stage').forEach(s=>s.style.display='none');
+  const sumPrim = document.getElementById('sum-primary');
+  if(sumPrim) sumPrim.style.display='block';
+  document.querySelectorAll('#page-summer .stage-tab').forEach((t,i)=>{
+    t.classList.toggle('active', i===0);
+  });
+}
+
+function tryRestoreSession(){
+  try{
+    const saved = sessionStorage.getItem('studentSession');
+    if(saved){
+      const student = JSON.parse(saved);
+      // verify still exists
+      const still = students.find(s=>s.id===student.id && s.username===student.username && s.pass===student.pass);
+      if(still){
+        currentStudent = still;
+        document.getElementById('studentLoginScreen').classList.add('hidden');
+        document.getElementById('studentBar').classList.add('show');
+        document.getElementById('studentBarName').textContent = still.username;
+        const gradeLabel = getGradeLabel(still.grade, still.stage);
+        document.getElementById('studentBarStage').textContent = gradeLabel;
+        applyStudentGradeFilter(still.stage, still.grade);
+        if(still.stage === 'summer'){
+          const subStage = still.grade ? still.grade.replace('sum_','') : 'primary';
+          switchPage('summer');
+          const sumTabEl = document.getElementById('sumTab-'+subStage);
+          if(sumTabEl) showSummerStage(subStage, sumTabEl);
+        }
+        return;
+      }
+    }
+  } catch(e){}
+  // No valid session — show login screen only if not in admin URL mode
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('admin') !== '1'){
+    document.getElementById('studentLoginScreen').classList.remove('hidden');
+  }
+}
+
+// ============================================================
+// ADMIN: MANAGE STUDENTS
+// ============================================================
+async function loadStudents(){
+  dbListen('students', val=>{
+    students = val ? Object.values(val).filter(Boolean) : [];
+    renderStudentsAdmin();
+    // re-validate session after students list updates
+    if(currentStudent){
+      const still = students.find(s=>s.id===currentStudent.id);
+      if(!still) studentLogout();
+    }
+  });
+}
+
+async function addStudent(){
+  if(!adminMode){showNotif('⚠️ يجب تسجيل الدخول كأدمن',true);return;}
+  const username = document.getElementById('newStudentUser').value.trim();
+  const pass     = document.getElementById('newStudentPass').value;
+  const stage    = document.getElementById('newStudentStage').value;
+  const grade    = document.getElementById('newStudentGrade').value;
+  if(!username){showNotif('⚠️ أدخل اسم المستخدم',true);return;}
+  if(!pass||pass.length<3){showNotif('⚠️ كلمة المرور قصيرة جداً (3 أحرف على الأقل)',true);return;}
+  if(students.find(s=>s.username===username)){showNotif('⚠️ اسم المستخدم موجود بالفعل',true);return;}
+  const id = 'st_'+Date.now();
+  const student = {id, username, pass, stage, grade};
+  students.push(student);
+  await saveStudents();
+  document.getElementById('newStudentUser').value='';
+  document.getElementById('newStudentPass').value='';
+  renderStudentsAdmin();
+  showNotif('✅ تم إضافة الطالب: '+username);
+}
+
+async function deleteStudent(id){
+  students = students.filter(s=>s.id!==id);
+  await saveStudents();
+  renderStudentsAdmin();
+  showNotif('🗑 تم حذف الطالب');
+}
+
+async function saveStudents(){
+  const obj = students.reduce((o,s)=>{ if(s&&s.id){o[s.id]=s;} return o; }, {});
+  await dbSet('students', obj);
+}
+
+function renderStudentsAdmin(){
+  const el = document.getElementById('studentsListAdmin');
+  if(!el) return;
+  if(!students.length){
+    el.innerHTML='<div style="font-size:.82rem;color:var(--muted);text-align:center;padding:.8rem">لا يوجد طلاب بعد</div>';
+    return;
+  }
+  el.innerHTML = students.map(s=>`
+    <div class="student-item-admin">
+      <div class="student-item-info">
+        <span class="student-item-name">👤 ${s.username}</span>
+        <span class="student-item-stage">${getGradeLabel(s.grade, s.stage)} · كلمة المرور: ${'•'.repeat(Math.min(s.pass.length,8))}</span>
+      </div>
+      <button class="btn-del-student" onclick="deleteStudent('${s.id}')" title="حذف الطالب">✕</button>
+    </div>`).join('');
+}
+
+// Update login avatar from siteData
+function updateLoginCard(){
+  const d = siteData;
+  if(d.avatarImg){
+    document.getElementById('loginAvatarImg').src=d.avatarImg;
+    document.getElementById('loginAvatarImg').style.display='block';
+    document.getElementById('loginAvatarEmoji').style.display='none';
+  } else {
+    document.getElementById('loginAvatarImg').style.display='none';
+    document.getElementById('loginAvatarEmoji').style.display='block';
+  }
+  if(d.heroName) document.getElementById('loginTitle').textContent = d.heroName;
+}
+
+// ============================================================
+// GRADES CONFIG
+// ============================================================
+const GRADES = {
+  primary:[
+    {id:'g6',label:'الصف السادس الابتدائي',emoji:'6️⃣',color:'var(--teal)'},
+  ],
+  prep:[
+    {id:'g7',label:'الصف الأول الإعدادي',emoji:'📗',color:'var(--blue)'},
+    {id:'g8',label:'الصف الثاني الإعدادي',emoji:'📘',color:'var(--blue)'},
+    {id:'g9',label:'الصف الثالث الإعدادي',emoji:'📙',color:'var(--blue)'},
+  ],
+  secondary:[
+    {id:'g10',label:'الصف الأول الثانوي',emoji:'🥇',color:'var(--purple)'},
+    {id:'g11',label:'الصف الثاني الثانوي',emoji:'🥈',color:'var(--purple)'},
+    {id:'g12',label:'الصف الثالث الثانوي',emoji:'🏆',color:'var(--purple)'},
+  ]
+};
+
+// ============================================================
+// IN-MEMORY DATA (kept in sync by Firebase listeners)
+// ============================================================
+let videos   = {};
+let sessions = [];
+let schedule = [];
+let sitelinks = [];
+let siteData = {
+  logoImg:'', logoText1:'مستر عمر', logoText2:'الورداني',
+  avatarImg:'', heroTitle:'تعلّم الإنجليزية مع', heroName:'مستر عمر الورداني',
+  heroSubtitle:'مرحبًا بكم في منصة Mr. Omar Elwerdany التعليمية — منصة تعليمية متخصصة في تدريس اللغة الإنجليزية لطلاب المرحلة الإعدادية والمرحلة الثانوية والصف السادس الابتدائي، تهدف إلى تقديم شرح مبسط ومتميز للمناهج الدراسية، مع توفير تدريبات متنوعة، وامتحانات إلكترونية، ومراجعات شاملة تساعد الطلاب على تحقيق أفضل النتائج والتفوق الدراسي.',
+  phone:'', whatsapp:'', email:'', facebook:'', youtube:'', maps:'', address:''
+};
+
+// Ensure grade arrays
+Object.values(GRADES).flat().forEach(g=>{ if(!videos[g.id]) videos[g.id]=[]; });
+
+// ============================================================
+// REAL-TIME LISTENERS  — keep in-memory data fresh
+// ============================================================
+function attachListeners(){
+  dbListen('videos', val => {
+    videos = val || {};
+    // normalize: Firebase may return objects instead of arrays
+    Object.keys(videos).forEach(gid=>{
+      if(videos[gid] && !Array.isArray(videos[gid])){
+        videos[gid] = Object.values(videos[gid]);
+      }
+    });
+    Object.values(GRADES).flat().forEach(g=>{ if(!videos[g.id]) videos[g.id]=[]; });
+    buildGradeCards();
+    updateTotalCount();
+    if(currentGrade) renderVideos();
+  });
+  dbListen('sessions', val => {
+    sessions = val ? Object.values(val).filter(Boolean) : [];
+    renderSessions();
+    updateTotalCount();
+  });
+  dbListen('schedule', val => {
+    schedule = val ? Object.values(val).filter(Boolean) : [];
+    
+  });
+  dbListen('sitelinks', val => {
+    sitelinks = val ? Object.values(val).filter(Boolean) : [];
+    renderSitelinks();
+  });
+  dbListen('summerData', val => {
+    if(val){ summerData = val; }
+    renderSummerPage();
+  });
+  dbListen('siteData', val => {
+    if(val){ siteData = {...siteData, ...val}; }
+    applySiteData();
+    updateLoginCard();
+    // تحديث صفحة التواصل إذا كانت مفتوحة
+    const cp = document.getElementById('page-contact');
+    if(cp && cp.classList.contains('active')) renderContactPage();
+    if(adminMode) loadAdminFields();
+  });
+  // Students listener
+  dbListen('students', val=>{
+    students = val ? Object.values(val).filter(Boolean) : [];
+    renderStudentsAdmin();
+    if(currentStudent){
+      const still = students.find(s=>s.id===currentStudent.id && s.pass===currentStudent.pass);
+      if(!still) studentLogout();
+    }
+    // Try restore session after first load
+    if(!currentStudent && !adminMode) tryRestoreSession();
+  });
+}
+
+// ============================================================
+// SAVE HELPERS  (write to Firebase paths)
+// ============================================================
+async function saveVideos()   { await dbSet('videos',   videos);   }
+async function saveSessions() {
+  const obj = sessions.reduce((o,s)=>{ if(s&&s.id){o[s.id]=s;} return o; }, {});
+  await dbSet('sessions', obj);
+}
+async function saveSchedule() {
+  const obj = schedule.reduce((o,s)=>{ if(s&&s.id){o[s.id]=s;} return o; }, {});
+  await dbSet('schedule', obj);
+}
+async function saveSiteData() { await dbSet('siteData', siteData); }
+async function saveAdminPass(p){ await dbSet('adminPass', p); }
+async function loadAdminPass(){ return (await dbGet('adminPass')) || 'omar2026'; }
+
+// ============================================================
+// STATE
+// ============================================================
+let currentGrade    = null;
+let currentPlatform = 'youtube';
+let sessionPlatform = 'youtube';
+let adminMode       = false;
+
+// ============================================================
+// PAGE NAVIGATION
+// ============================================================
+function switchPage(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.page-tab').forEach(t=>t.classList.toggle('active', t.dataset.page===page));
+  const el = document.getElementById('page-'+page);
+  if(el) el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  if(page==='admin') renderAdminPage();
+
+  if(page==='contact') renderContactPage();
+  if(page==='sessions') renderSessions();
+  if(page==='summer') renderSummerPage();
+}
+
+// ============================================================
+// APPLY SITE DATA
+// ============================================================
+function applySiteData(){
+  const d = siteData;
+  // Logo
+  if(d.logoImg){
+    document.getElementById('logoImg').src = d.logoImg;
+    document.getElementById('logoImg').style.display='block';
+    document.getElementById('logoEmoji').style.display='none';
+  } else {
+    document.getElementById('logoImg').style.display='none';
+    document.getElementById('logoEmoji').style.display='block';
+  }
+  // Logo text
+  const logoTextEl = document.getElementById('logoText');
+  logoTextEl.innerHTML = `${d.logoText1||'مستر عمر'} <span>${d.logoText2||'الورداني'}</span>`;
+
+  // Avatar
+  if(d.avatarImg){
+    document.getElementById('heroAvatarImg').src = d.avatarImg;
+    document.getElementById('heroAvatarImg').style.display='block';
+    document.getElementById('heroAvatarEmoji').style.display='none';
+  } else {
+    document.getElementById('heroAvatarImg').style.display='none';
+    document.getElementById('heroAvatarEmoji').style.display='block';
+  }
+
+  // Hero text
+  const titleEl = document.getElementById('heroTitle');
+  titleEl.innerHTML = `${d.heroTitle||'تعلّم الإنجليزية مع'}<br><em id="heroTitleName">${d.heroName||'مستر عمر الورداني'}</em>`;
+  const subtitleEl = document.getElementById('heroSubtitle');
+  if(subtitleEl) subtitleEl.textContent = d.heroSubtitle||'';
+
+  // Footer
+  document.getElementById('footerName').textContent = `English With Mr. ${d.heroName||'Omar El-Wardany'}`;
+
+  // Contact strip
+  renderContactStrip();
+
+  // Avatar click — only active in admin mode
+  const avatarWrap = document.getElementById('heroAvatarWrap');
+  if(avatarWrap){
+    avatarWrap.onclick = ()=>{ if(adminMode) adminEditAvatar(); };
+  }
+}
+
+function renderContactStrip(){
+  const d = siteData;
+  const items = [];
+  if(d.phone) items.push(`<a class="contact-item" href="tel:${d.phone}"><span class="ci">📱</span>${d.phone}</a>`);
+  if(d.whatsapp) items.push(`<a class="contact-item" href="https://wa.me/${d.whatsapp.replace(/\D/g,'')}" target="_blank"><span class="ci">💬</span>واتساب</a>`);
+  if(d.email) items.push(`<a class="contact-item" href="mailto:${d.email}"><span class="ci">📧</span>${d.email}</a>`);
+  if(d.facebook) items.push(`<a class="contact-item" href="${d.facebook}" target="_blank"><span class="ci">📘</span>فيسبوك</a>`);
+  if(d.youtube) items.push(`<a class="contact-item" href="${d.youtube}" target="_blank"><span class="ci">▶</span>يوتيوب</a>`);
+  if(d.maps) items.push(`<a class="contact-item" href="${d.maps}" target="_blank"><span class="ci">📍</span>خرائط</a>`);
+  document.getElementById('contactStrip').innerHTML = items.length ? items.join('') : '<span style="font-size:.82rem;color:var(--muted)">📞 سيتم إضافة معلومات التواصل قريباً</span>';
+}
+
+function renderContactPage(){
+  const d = siteData;
+  const cards = [];
+  if(d.phone) cards.push(contactCard('📱','الهاتف',d.phone,`tel:${d.phone}`));
+  if(d.whatsapp) cards.push(contactCard('💬','واتساب',d.whatsapp,`https://wa.me/${d.whatsapp.replace(/\D/g,'')}`));
+  if(d.email) cards.push(contactCard('📧','البريد الإلكتروني',d.email,`mailto:${d.email}`));
+  // فيسبوك — يظهر دائماً
+  cards.push(d.facebook
+    ? contactCard('📘','صفحة فيسبوك','تابعنا على فيسبوك',d.facebook)
+    : contactCardEmpty('📘','صفحة فيسبوك','لم يُضف الرابط بعد'));
+  // يوتيوب — يظهر دائماً
+  cards.push(d.youtube
+    ? contactCard('▶','قناة يوتيوب','تابعنا على يوتيوب',d.youtube)
+    : contactCardEmpty('▶','قناة يوتيوب','لم يُضف الرابط بعد'));
+  if(d.maps) cards.push(contactCard('📍','الموقع على الخريطة',d.address||'اضغط لرؤية الموقع',d.maps));
+  const el = document.getElementById('contactCards');
+  el.innerHTML = cards.length ? cards.join('') : `<div class="empty-state"><div class="empty-icon">📞</div><p>لم تُضف معلومات التواصل بعد<br><small>يمكن للأدمن إضافتها من لوحة الإدارة</small></p></div>`;
+}
+function contactCard(icon,title,val,href){
+  return `<div class="admin-card" style="cursor:pointer" onclick="window.open('${href}','_blank')">
+    <h3>${icon} ${title}</h3>
+    <p style="font-size:.9rem;color:var(--text);direction:ltr;text-align:right">${val}</p>
+  </div>`;
+}
+function contactCardEmpty(icon,title,note){
+  return `<div class="admin-card" style="opacity:.6">
+    <h3>${icon} ${title}</h3>
+    <p style="font-size:.85rem;color:var(--muted)">${note}</p>
+  </div>`;
+}
+
+// ============================================================
+// GRADE CARDS
+// ============================================================
+function buildGradeCards(){
+  Object.keys(GRADES).forEach(stage=>{
+    const grid = document.getElementById('grid-'+stage);
+    if(!grid) return;
+    grid.innerHTML = '';
+    GRADES[stage].forEach(g=>{
+      const count = videos[g.id] ? videos[g.id].length : 0;
+      const card = document.createElement('div');
+      card.className = 'grade-card fade-in';
+      card.onclick = ()=>openGrade(g.id);
+      card.innerHTML = `
+        <div class="grade-card-top">
+          <div class="grade-num" style="color:${g.color}">${g.emoji}</div>
+          <div class="grade-card-info">
+            <h3>${g.label}</h3>
+            <p>اللغة الإنجليزية — المنهج المصري</p>
+          </div>
+        </div>
+        <div class="grade-card-body">
+          <div class="video-count" id="count-${g.id}">🎬 عدد الفيديوهات: <span>${count}</span></div>
+          <button class="btn-open">📂 فتح الصف وعرض الفيديوهات</button>
+        </div>`;
+      grid.appendChild(card);
+    });
+  });
+  setTimeout(()=>{
+    document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+    // Reapply student grade filter if a student is logged in
+    if(currentStudent && currentStudent.grade){
+      applyStudentGradeFilter(currentStudent.stage, currentStudent.grade);
+    }
+  },100);
+}
+
+// ============================================================
+// STAGE SWITCHER
+// ============================================================
+function showStage(stage,btn){
+  document.querySelectorAll('.grade-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.stage-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('sec-'+stage).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ============================================================
+// GRADE MODAL
+// ============================================================
+function openGrade(gid){
+  currentGrade = gid;
+  const g = Object.values(GRADES).flat().find(x=>x.id===gid);
+  document.getElementById('modalTitle').textContent = g.label;
+  document.getElementById('modalSub').textContent = '🇬🇧 اللغة الإنجليزية — المنهج المصري المطوّر';
+  document.getElementById('vidTitle').value='';
+  document.getElementById('vidUrl').value='';
+  document.getElementById('vidDesc').value='';
+  document.getElementById('embedPreview').classList.remove('show');
+  document.getElementById('addVideoBox').style.display = adminMode ? 'block' : 'none';
+  currentPlatform='youtube'; updatePlatformUI();
+  renderVideos();
+  document.getElementById('gradeModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeGradeModal(){ document.getElementById('gradeModal').classList.remove('open'); document.body.style.overflow=''; currentGrade=null; }
+function closeModal(e,id){ if(e.target===document.getElementById(id)) closeModalById(id); }
+function closeModalById(id){ document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
+// ============================================================
+// PLATFORM SELECTION (VIDEOS)
+// ============================================================
+function selectPlatform(p){ currentPlatform=p; updatePlatformUI(); document.getElementById('vidUrl').value=''; document.getElementById('embedPreview').classList.remove('show'); }
+function updatePlatformUI(){
+  document.getElementById('pbYT').classList.toggle('active', currentPlatform==='youtube');
+  document.getElementById('pbFB').classList.toggle('active', currentPlatform==='facebook');
+  document.getElementById('pbLK').classList.toggle('active', currentPlatform==='link');
+  const labels = {youtube:'رابط الفيديو من يوتيوب *', facebook:'رابط الفيديو من فيسبوك *', link:'رابط جوجل فورم أو أي رابط إلكتروني *'};
+  const placeholders = {youtube:'https://www.youtube.com/watch?v=...', facebook:'https://www.facebook.com/watch?v=...', link:'https://docs.google.com/forms/d/e/..../viewform'};
+  document.getElementById('urlLabel').textContent = labels[currentPlatform]||'رابط *';
+  document.getElementById('vidUrl').placeholder = placeholders[currentPlatform]||'https://...';
+}
+
+// ============================================================
+// URL HELPERS
+// ============================================================
+function getYTId(url){
+  try{
+    const u=new URL(url);
+    if(u.hostname.includes('youtu.be')) return u.pathname.slice(1).split('?')[0];
+    if(u.searchParams.get('v')) return u.searchParams.get('v');
+    const m=url.match(/(?:embed\/|v=|shorts\/)([a-zA-Z0-9_-]{11})/);
+    return m?m[1]:null;
+  }catch(e){return null;}
+}
+function getEmbedUrl(url,platform){
+  if(platform==='youtube'){ const id=getYTId(url); return id?`https://www.youtube.com/embed/${id}`:null; }
+  if(url&&url.includes('facebook.com')) return 'https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(url)+'&show_text=false&width=560';
+  return null;
+}
+function previewEmbed(){
+  const url=document.getElementById('vidUrl').value.trim();
+  const eUrl=getEmbedUrl(url,currentPlatform);
+  const box=document.getElementById('embedPreview');
+  const frame=document.getElementById('embedFrame');
+  if(eUrl){frame.src=eUrl;box.classList.add('show');}
+  else{box.classList.remove('show');frame.src='';}
+}
+
+// ============================================================
+// ADD / DELETE VIDEO
+// ============================================================
+async function addVideo(){
+  if(!adminMode){showNotif('⚠️ يجب تسجيل الدخول كأدمن',true);return;}
+  const title=document.getElementById('vidTitle').value.trim();
+  const url=document.getElementById('vidUrl').value.trim();
+  const desc=document.getElementById('vidDesc').value.trim();
+  if(!title){showNotif('⚠️ أدخل عنوان الفيديو',true);return;}
+  if(!url){showNotif('⚠️ أدخل الرابط',true);return;}
+  let eUrl = null;
+  if(currentPlatform !== 'link'){
+    eUrl=getEmbedUrl(url,currentPlatform);
+    if(!eUrl){showNotif('⚠️ الرابط غير صحيح',true);return;}
+  }
+  const vid={id:Date.now().toString(),title,url,embedUrl:eUrl,desc,platform:currentPlatform,date:new Date().toLocaleDateString('ar-EG')};
+  if(!videos[currentGrade]) videos[currentGrade]=[];
+  if(!Array.isArray(videos[currentGrade])) videos[currentGrade]=Object.values(videos[currentGrade]);
+  videos[currentGrade].push(vid);
+  await saveVideos();
+  document.getElementById('vidTitle').value='';
+  document.getElementById('vidUrl').value='';
+  document.getElementById('vidDesc').value='';
+  document.getElementById('embedPreview').classList.remove('show');
+  document.getElementById('embedFrame').src='';
+  renderVideos(); updateCardCount(currentGrade); updateTotalCount();
+  showNotif('✅ تم إضافة الرابط بنجاح!');
+}
+async function deleteVideo(gid,vid){
+  if(!confirm('هل تريد حذف هذا الفيديو؟')) return;
+  videos[gid]=videos[gid].filter(v=>v.id!==vid);
+  await saveVideos();
+  renderVideos(); updateCardCount(gid); updateTotalCount();
+  showNotif('🗑 تم حذف الفيديو');
+}
+function renderVideos(){
+  const list=document.getElementById('videosList');
+  const countEl=document.getElementById('vidCount');
+  const gVideos=videos[currentGrade]||[];
+  countEl.textContent=gVideos.length+' فيديو';
+  if(gVideos.length===0){list.innerHTML=`<div class="empty-state"><div class="empty-icon">🎬</div><p>لا توجد فيديوهات بعد<br>أضف أول فيديو من الأعلى</p></div>`;return;}
+  list.innerHTML=gVideos.map(v=>{
+    const isYT=v.platform==='youtube';
+    const isLK=v.platform==='link';
+    const ytId=isYT?getYTId(v.url):null;
+    const thumb = isLK
+      ? `<div class="thumb-placeholder" style="background:rgba(66,133,244,.15);font-size:1.5rem">📋</div>`
+      : ytId
+        ? `<img src="https://img.youtube.com/vi/${ytId}/mqdefault.jpg" alt="${v.title}" onerror="this.style.display='none'">`
+        : `<div class="thumb-placeholder" style="background:rgba(24,119,242,.15);font-size:1.5rem">f</div>`;
+    const platLabel = isYT ? '▶ YouTube' : isLK ? '📋 Google Form' : 'f Facebook';
+    const platClass = isYT ? 'yt' : isLK ? 'lk' : 'fb';
+    return `<div class="video-item">
+      <div class="video-thumb">${thumb}</div>
+      <div class="video-info">
+        <div class="video-title">${v.title}</div>
+        <div class="video-meta">
+          <span class="video-platform ${platClass}">${platLabel}</span>
+          <span style="font-size:.72rem;color:var(--muted)">${v.date||''}</span>
+        </div>
+        ${v.desc?`<div class="video-desc">${v.desc}</div>`:''}
+      </div>
+      <div class="video-actions">
+        ${isLK
+          ? `<button class="btn-watch" onclick="openLinkViewer('${v.url.replace(/'/g,"\\'")}','${v.title.replace(/'/g,"\\'")}')">📋 فتح الفورم</button>`
+          : `<button class="btn-watch" onclick="openVideoPlayer('${v.url.replace(/'/g,"\\'")}','${v.title.replace(/'/g,"\\'")}','${v.platform||'youtube'}')">▶ مشاهدة</button>`
+        }
+        ${adminMode?`<button class="btn-del" onclick="deleteVideo('${currentGrade}','${v.id}')" title="حذف">✕</button>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+function updateCardCount(gid){
+  const el=document.getElementById('count-'+gid);
+  if(el){ const c=videos[gid]?videos[gid].length:0; el.innerHTML=`🎬 عدد الفيديوهات: <span>${c}</span>`; }
+}
+function updateTotalCount(){
+  const total = Object.values(videos).reduce((s,a)=>s+(Array.isArray(a)?a.length:0),0);
+  document.getElementById('totalVideos').textContent = total;
+  document.getElementById('totalSessions').textContent = sessions.length;
+}
+
+// ============================================================
+// SESSIONS
+// ============================================================
+function openSessionModal(){
+  if(!adminMode){showNotif('⚠️ يجب تسجيل الدخول كأدمن',true);return;}
+  sessionPlatform='youtube'; updateSessionPlatformUI();
+  document.getElementById('sessTitle').value='';
+  document.getElementById('sessUrl').value='';
+  document.getElementById('sessDesc').value='';
+  document.getElementById('sessDateTime').value='';
+  document.getElementById('sessStatus').value='upcoming';
+  document.getElementById('sessionModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function selectSessionPlatform(p){
+  sessionPlatform=p; updateSessionPlatformUI();
+  document.getElementById('sessUrl').value='';
+}
+function updateSessionPlatformUI(){
+  const map={YT:'youtube',FB:'facebook',ZM:'zoom'};
+  ['YT','FB','ZM'].forEach(k=>{
+    const el=document.getElementById('spb'+k);
+    if(el) el.classList.toggle('active', map[k]===sessionPlatform);
+  });
+  const labels={youtube:'رابط الحصة من يوتيوب *',facebook:'رابط الحصة من فيسبوك *',zoom:'رابط اجتماع زوم *'};
+  const placeholders={youtube:'https://www.youtube.com/watch?v=...',facebook:'https://www.facebook.com/...',zoom:'https://zoom.us/j/...'};
+  document.getElementById('sessUrlLabel').textContent=labels[sessionPlatform]||'رابط الحصة *';
+  document.getElementById('sessUrl').placeholder=placeholders[sessionPlatform]||'';
+}
+async function addSession(){
+  if(!adminMode){showNotif('⚠️ يجب تسجيل الدخول كأدمن',true);return;}
+  const title=document.getElementById('sessTitle').value.trim();
+  const url=document.getElementById('sessUrl').value.trim();
+  const desc=document.getElementById('sessDesc').value.trim();
+  const dt=document.getElementById('sessDateTime').value;
+  const status=document.getElementById('sessStatus').value;
+  if(!title){showNotif('⚠️ أدخل عنوان الحصة',true);return;}
+  if(!url){showNotif('⚠️ أدخل رابط الحصة',true);return;}
+  sessions.push({id:Date.now().toString(),title,url,desc,platform:sessionPlatform,status,datetime:dt,date:new Date().toLocaleDateString('ar-EG')});
+  await saveSessions();
+  closeModalById('sessionModal');
+  renderSessions(); updateTotalCount();
+  showNotif('✅ تم إضافة الحصة!');
+}
+async function deleteSession(id){
+  if(!confirm('حذف هذه الحصة؟')) return;
+  sessions=sessions.filter(s=>s.id!==id);
+  await saveSessions();
+  renderSessions(); updateTotalCount();
+  showNotif('🗑 تم حذف الحصة');
+}
+function renderSessions(){
+  const grid=document.getElementById('sessionsGrid');
+  if(!grid) return;
+  if(!sessions.length){
+    grid.innerHTML=`<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">📡</div><p>لا توجد حصص أونلاين بعد<br><span style="font-size:.8rem;opacity:.6">سيتم إضافة الحصص قريباً</span></p></div>`;
+    return;
+  }
+  const badges={live:`<span class="session-badge live">🔴 مباشر الآن</span>`,upcoming:`<span class="session-badge upcoming">⏰ قادمة</span>`,recorded:`<span class="session-badge recorded">📹 مسجلة</span>`};
+  const platIcon={youtube:'▶',facebook:'f',zoom:'🎥'};
+  const platClass={youtube:'yt',facebook:'fb',zoom:'zm'};
+  const joinClass={youtube:'',facebook:'fb-btn',zoom:'zoom-btn'};
+  const joinLabel={youtube:'▶ يوتيوب',facebook:'f فيسبوك',zoom:'🎥 زوم'};
+  grid.innerHTML=sessions.map(s=>`
+    <div class="session-card">
+      <div class="session-card-top">
+        <div class="session-platform-icon ${platClass[s.platform]||'yt'}">${platIcon[s.platform]||'▶'}</div>
+        <div class="session-info">
+          <h3>${s.title}</h3>
+          <div class="session-meta">
+            ${badges[s.status]||''}
+            ${s.platform==='zoom'?'<span class="session-badge zoom">🎥 Zoom</span>':''}
+          </div>
+        </div>
+      </div>
+      ${s.desc?`<div class="session-desc">${s.desc}</div>`:''}
+      <div class="session-footer">
+        <div class="session-time">📅 ${s.datetime?new Date(s.datetime).toLocaleString('ar-EG'):s.date||''}</div>
+        <div class="session-actions">
+          <a class="btn-join ${joinClass[s.platform]||''}" href="${s.url}" target="_blank" rel="noopener">${joinLabel[s.platform]||'▶ الانضمام'}</a>
+          ${adminMode?`<button class="btn-del-session" onclick="deleteSession('${s.id}')">✕</button>`:''}
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ============================================================
+// SCHEDULE
+// ============================================================
+const DAYS=['السبت','الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة'];
+function openScheduleModal(){
+  if(!adminMode){showNotif('⚠️ يجب تسجيل الدخول كأدمن',true);return;}
+  document.getElementById('schedGrade').value='';
+  document.getElementById('schedTime').value='';
+  document.getElementById('scheduleModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+async function addSchedule(){
+  if(!adminMode){showNotif('⚠️ يجب تسجيل الدخول كأدمن',true);return;}
+  const day=document.getElementById('schedDay').value;
+  const time=document.getElementById('schedTime').value;
+  const grade=document.getElementById('schedGrade').value.trim();
+  if(!grade){showNotif('⚠️ أدخل تفاصيل الحصة',true);return;}
+  if(!time){showNotif('⚠️ أدخل الوقت',true);return;}
+  schedule.push({id:Date.now().toString(),day,time,grade});
+  await saveSchedule();
+  closeModalById('scheduleModal');
+  
+  showNotif('✅ تم إضافة الموعد!');
+}
+async function deleteSchedule(id){
+  schedule=schedule.filter(s=>s.id!==id);
+  await saveSchedule();
+  
+  showNotif('🗑 تم حذف الموعد');
+}
+function renderSchedulePage(){
+  const grid=document.getElementById('scheduleGrid');
+  if(!grid) return;
+  grid.innerHTML=DAYS.map(day=>{
+    const items=schedule.filter(s=>s.day===day).sort((a,b)=>a.time.localeCompare(b.time));
+    return `<div class="schedule-card">
+      <div class="schedule-day">📅 ${day}</div>
+      ${items.length?items.map(i=>`
+        <div class="schedule-item">
+          <span class="schedule-time">${formatTime(i.time)}</span>
+          <span class="schedule-grade">${i.grade}</span>
+          ${adminMode?`<button class="btn-del-sched" onclick="deleteSchedule('${i.id}')">✕</button>`:''}
+        </div>`).join(''):`<div class="schedule-empty">لا توجد حصص</div>`}
+    </div>`;
+  }).join('');
+}
+function formatTime(t){
+  if(!t) return '';
+  const [h,m]=t.split(':');
+  const hr=parseInt(h);
+  const ampm=hr>=12?'م':'ص';
+  const h12=hr%12||12;
+  return `${h12}:${m} ${ampm}`;
+}
+
+// ============================================================
+// ADMIN AUTH
+// ============================================================
+async function adminLogin(){
+  const pass=document.getElementById('adminPassInput').value;
+  const stored = await loadAdminPass();
+  if(pass===stored){
+    adminMode=true;
+    document.body.classList.add('admin-mode');
+    document.getElementById('adminLoginBox').style.display='none';
+    document.getElementById('adminPanelBox').style.display='block';
+    // Hide student login screen, show admin bar info
+    document.getElementById('studentLoginScreen').classList.add('hidden');
+    document.getElementById('studentBar').classList.add('show');
+    document.getElementById('studentBarName').textContent = 'الأدمن';
+    document.getElementById('studentBarStage').textContent = '⚙️ وضع الإدارة';
+    document.querySelector('.btn-student-logout').style.display='none';
+    // Restore all stage tabs for admin
+    removeStudentStageFilter();
+    loadAdminFields();
+    // refresh open modal admin controls
+    if(currentGrade) document.getElementById('addVideoBox').style.display='block';
+    renderSessions();
+    showNotif('✅ مرحباً بك في لوحة الإدارة');
+    // show admin-only elements
+    document.querySelectorAll('.admin-only').forEach(el=>el.style.display='flex');
+  } else {
+    showNotif('⚠️ كلمة المرور غير صحيحة',true);
+    document.getElementById('adminPassInput').value='';
+  }
+}
+function adminLogout(){
+  adminMode=false;
+  document.body.classList.remove('admin-mode');
+  document.getElementById('adminLoginBox').style.display='block';
+  document.getElementById('adminPanelBox').style.display='none';
+  document.getElementById('adminPassInput').value='';
+  document.querySelectorAll('.admin-only').forEach(el=>el.style.display='none');
+  renderSessions();
+  // Restore student logout button visibility
+  document.querySelector('.btn-student-logout').style.display='';
+  // Return to student login screen
+  document.getElementById('studentLoginScreen').classList.remove('hidden');
+  document.getElementById('studentBar').classList.remove('show');
+  showNotif('👋 تم تسجيل الخروج');
+}
+async function changePassword(){
+  const p1=document.getElementById('newPass1').value;
+  const p2=document.getElementById('newPass2').value;
+  if(!p1){showNotif('⚠️ أدخل كلمة المرور الجديدة',true);return;}
+  if(p1!==p2){showNotif('⚠️ كلمتا المرور غير متطابقتين',true);return;}
+  if(p1.length<4){showNotif('⚠️ كلمة المرور قصيرة جداً',true);return;}
+  await saveAdminPass(p1);
+  document.getElementById('newPass1').value='';
+  document.getElementById('newPass2').value='';
+  showNotif('✅ تم تغيير كلمة المرور');
+}
+function renderAdminPage(){
+  if(adminMode){
+    document.getElementById('adminLoginBox').style.display='none';
+    document.getElementById('adminPanelBox').style.display='block';
+  } else {
+    document.getElementById('adminLoginBox').style.display='block';
+    document.getElementById('adminPanelBox').style.display='none';
+  }
+}
+
+// ============================================================
+// ADMIN: LOAD FIELDS
+// ============================================================
+function loadAdminFields(){
+  const d=siteData;
+  document.getElementById('adminLogoText1').value=d.logoText1||'مستر عمر';
+  document.getElementById('adminLogoText2').value=d.logoText2||'الورداني';
+  document.getElementById('adminHeroTitle').value=d.heroTitle||'تعلّم الإنجليزية مع';
+  document.getElementById('adminHeroName').value=d.heroName||'مستر عمر الورداني';
+  document.getElementById('adminHeroSubtitle').value=d.heroSubtitle||'';
+  document.getElementById('ci_phone').value=d.phone||'';
+  document.getElementById('ci_whatsapp').value=d.whatsapp||'';
+  document.getElementById('ci_email').value=d.email||'';
+  document.getElementById('ci_facebook').value=d.facebook||'';
+  document.getElementById('ci_youtube').value=d.youtube||'';
+  document.getElementById('ci_maps').value=d.maps||'';
+  document.getElementById('ci_address').value=d.address||'';
+  // logo preview
+  if(d.logoImg){
+    document.getElementById('adminLogoPreview').src=d.logoImg;
+    document.getElementById('adminLogoPreview').style.display='block';
+    document.getElementById('adminLogoEmoji').style.display='none';
+  }
+  // avatar preview
+  if(d.avatarImg){
+    document.getElementById('adminAvatarPreview').src=d.avatarImg;
+    document.getElementById('adminAvatarPreview').style.display='block';
+    document.getElementById('adminAvatarEmoji').style.display='none';
+  }
+}
+
+// ============================================================
+// ADMIN: SAVE BRAND
+// ============================================================
+async function saveBrand(){
+  siteData.logoText1=document.getElementById('adminLogoText1').value.trim()||'مستر عمر';
+  siteData.logoText2=document.getElementById('adminLogoText2').value.trim()||'الورداني';
+  await saveSiteData();
+  applySiteData();
+  showNotif('✅ تم حفظ الهوية');
+}
+async function saveHero(){
+  siteData.heroTitle=document.getElementById('adminHeroTitle').value.trim()||'تعلّم الإنجليزية مع';
+  siteData.heroName=document.getElementById('adminHeroName').value.trim()||'مستر عمر الورداني';
+  siteData.heroSubtitle=document.getElementById('adminHeroSubtitle').value.trim();
+  await saveSiteData();
+  applySiteData();
+  showNotif('✅ تم حفظ النصوص');
+}
+async function saveContact(){
+  siteData.phone=document.getElementById('ci_phone').value.trim();
+  siteData.whatsapp=document.getElementById('ci_whatsapp').value.trim();
+  siteData.email=document.getElementById('ci_email').value.trim();
+  siteData.facebook=document.getElementById('ci_facebook').value.trim();
+  siteData.youtube=document.getElementById('ci_youtube').value.trim();
+  siteData.maps=document.getElementById('ci_maps').value.trim();
+  siteData.address=document.getElementById('ci_address').value.trim();
+  await saveSiteData();
+  applySiteData();
+  showNotif('✅ تم حفظ معلومات التواصل');
+}
+
+// ============================================================
+// ADMIN: UPLOAD LOGO
+// ============================================================
+function uploadLogo(input){
+  const file=input.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=async e=>{
+    const dataUrl=e.target.result;
+    siteData.logoImg=dataUrl;
+    await saveSiteData();
+    document.getElementById('adminLogoPreview').src=dataUrl;
+    document.getElementById('adminLogoPreview').style.display='block';
+    document.getElementById('adminLogoEmoji').style.display='none';
+    applySiteData();
+    showNotif('✅ تم رفع الشعار وحفظه!');
+  };
+  reader.readAsDataURL(file);
+}
+async function removeLogo(){
+  siteData.logoImg='';
+  await saveSiteData();
+  document.getElementById('adminLogoPreview').style.display='none';
+  document.getElementById('adminLogoEmoji').style.display='block';
+  applySiteData();
+  showNotif('🗑 تم إزالة الشعار');
+}
+
+// ============================================================
+// ADMIN: UPLOAD AVATAR
+// ============================================================
+function adminEditAvatar(){
+  if(!adminMode) return;
+  const input=document.createElement('input');
+  input.type='file'; input.accept='image/*';
+  input.onchange=e=>uploadAvatar(e.target);
+  input.click();
+}
+function uploadAvatar(input){
+  const file=input.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=async e=>{
+    const dataUrl=e.target.result;
+    siteData.avatarImg=dataUrl;
+    await saveSiteData();
+    document.getElementById('adminAvatarPreview').src=dataUrl;
+    document.getElementById('adminAvatarPreview').style.display='block';
+    document.getElementById('adminAvatarEmoji').style.display='none';
+    applySiteData();
+    showNotif('✅ تم رفع الصورة الشخصية!');
+  };
+  reader.readAsDataURL(file);
+}
+async function removeAvatar(){
+  siteData.avatarImg='';
+  await saveSiteData();
+  document.getElementById('adminAvatarPreview').style.display='none';
+  document.getElementById('adminAvatarEmoji').style.display='block';
+  applySiteData();
+  showNotif('🗑 تم إزالة الصورة الشخصية');
+}
+
+// ============================================================
+// SITE LINKS
+// ============================================================
+function openAddSitelinkForm(){
+  document.getElementById('addSitelinkBox').scrollIntoView({behavior:'smooth',block:'center'});
+  document.getElementById('slName').focus();
+}
+async function addSitelink(){
+  if(!adminMode){showNotif('⚠️ يجب تسجيل الدخول كأدمن',true);return;}
+  const name = document.getElementById('slName').value.trim();
+  const url  = document.getElementById('slUrl').value.trim();
+  const icon = document.getElementById('slIcon').value.trim() || '🌐';
+  if(!name){showNotif('⚠️ أدخل اسم الموقع',true);return;}
+  if(!url||!url.startsWith('http')){showNotif('⚠️ أدخل رابطاً صحيحاً يبدأ بـ https://',true);return;}
+  const link = {id:'sl_'+Date.now(), name, url, icon};
+  sitelinks.push(link);
+  await saveSitelinks();
+  document.getElementById('slName').value='';
+  document.getElementById('slUrl').value='';
+  document.getElementById('slIcon').value='';
+  renderSitelinks();
+  showNotif('✅ تم إضافة الرابط: '+name);
+}
+async function deleteSitelink(id){
+  if(!confirm('حذف هذا الرابط؟')) return;
+  sitelinks = sitelinks.filter(s=>s.id!==id);
+  await saveSitelinks();
+  renderSitelinks();
+  showNotif('🗑 تم حذف الرابط');
+}
+async function saveSitelinks(){
+  const obj = sitelinks.reduce((o,s)=>{ if(s&&s.id){o[s.id]=s;} return o; }, {});
+  await dbSet('sitelinks', obj);
+}
+function renderSitelinks(){
+  const grid = document.getElementById('sitelinksGrid');
+  const empty = document.getElementById('sitelinksEmpty');
+  if(!grid) return;
+  if(!sitelinks.length){
+    grid.innerHTML = '<div class="sitelinks-empty" id="sitelinksEmpty">لا توجد روابط بعد — يمكن للأدمن إضافتها</div>';
+    return;
+  }
+  // get display URL (hostname only)
+  function shortUrl(u){ try{ return new URL(u).hostname; }catch(e){ return u; } }
+  grid.innerHTML = sitelinks.map(s=>`
+    <div class="sitelink-card" onclick="openLinkViewer('${s.url.replace(/'/g,"\\'")}','${s.name.replace(/'/g,"\\'")}')">
+      <button class="btn-del-sitelink" onclick="event.stopPropagation();deleteSitelink('${s.id}')" title="حذف">✕</button>
+      <div class="sitelink-icon">${s.icon||'🌐'}</div>
+      <div class="sitelink-info">
+        <div class="sitelink-name">${s.name}</div>
+        <div class="sitelink-url">${shortUrl(s.url)}</div>
+      </div>
+      <span class="sitelink-arrow">↗</span>
+    </div>`).join('');
+}
+window.openAddSitelinkForm = openAddSitelinkForm;
+window.addSitelink         = addSitelink;
+window.deleteSitelink      = deleteSitelink;
+
+// ============================================================
+// ============================================================
+// VIDEO PLAYER MODAL (داخل المنصة)
+// ============================================================
+function openVideoPlayer(url, title, platform){
+  const embedUrl = getEmbedUrl(url, platform);
+  if(!embedUrl){
+    // فيسبوك أو روابط لا تدعم الـ embed → افتح خارجياً
+    window.open(url, '_blank', 'noopener,noreferrer');
+    return;
+  }
+  const icons = {youtube:'▶', facebook:'f'};
+  document.getElementById('videoPlayerTitle').textContent = title;
+  document.getElementById('videoPlayerPlatformIcon').textContent = icons[platform]||'▶';
+  document.getElementById('videoPlayerFrame').src = embedUrl;
+  document.getElementById('videoPlayerExtLink').href = url;
+  document.getElementById('videoPlayerModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeVideoPlayer(){
+  document.getElementById('videoPlayerModal').classList.remove('open');
+  document.getElementById('videoPlayerFrame').src = '';
+  document.body.style.overflow = '';
+}
+function openLinkViewer(url, title){
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+function closeLinkViewerBtn(){}
+function closeLinkViewer(e){}
+window.openVideoPlayer = openVideoPlayer;
+window.closeVideoPlayer = closeVideoPlayer;
+window.openLinkViewer  = openLinkViewer;
+window.closeLinkViewer = closeLinkViewer;
+window.closeLinkViewerBtn = closeLinkViewerBtn;
+
+// ============================================================
+// NOTIFICATIONS
+// ============================================================
+let notifTimer;
+function showNotif(msg,err=false){
+  clearTimeout(notifTimer);
+  const n=document.getElementById('notif');
+  document.getElementById('notifText').textContent=msg;
+  document.getElementById('notifIcon').textContent=err?'⚠️':'✅';
+  n.style.borderColor=err?'rgba(255,95,109,.4)':'var(--border)';
+  n.classList.add('show');
+  notifTimer=setTimeout(()=>n.classList.remove('show'),3500);
+}
+
+// ============================================================
+// INTERSECTION OBSERVER
+// ============================================================
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('visible');});
+},{threshold:.08});
+
+// ============================================================
+// SCROLL TOP
+// ============================================================
+window.addEventListener('scroll',()=>{
+  document.getElementById('scrollTopBtn').classList.toggle('show',window.scrollY>300);
+});
+
+// ============================================================
+// KEYBOARD
+// ============================================================
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    ['gradeModal','sessionModal'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el&&el.classList.contains('open')) closeModalById(id);
+    });
+  }
+});
+
+// ============================================================
+// EXPOSE FUNCTIONS TO INLINE onclick HANDLERS
+// (required because this is a module script)
+// ============================================================
+
+// ============================================================
+// SUMMER COURSE
+// ============================================================
+let summerData = { primary:{videos:[],links:[]}, prep:{videos:[],links:[]}, secondary:{videos:[],links:[]} };
+
+function showSummerStage(stage, btn){
+  document.querySelectorAll('.summer-stage').forEach(s=>s.style.display='none');
+  document.querySelectorAll('#page-summer .stage-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('sum-'+stage).style.display='block';
+  btn.classList.add('active');
+}
+
+function renderSummerPage(){
+  ['primary','prep','secondary'].forEach(function(stage){
+    const data = summerData[stage] || {videos:[],links:[]};
+
+    // Videos
+    const vEl = document.getElementById('sumVideos-'+stage);
+    if(vEl){
+      if(!data.videos || !data.videos.length){
+        vEl.innerHTML = '<div class="empty-state"><div class="empty-icon">🎬</div><p>لا توجد فيديوهات بعد</p></div>';
+      } else {
+        vEl.innerHTML = data.videos.map(function(v){
+          const isYT = v.url && (v.url.includes('youtu'));
+          const ytId = isYT ? getYTId(v.url) : null;
+          const thumbHtml = ytId
+            ? '<img src="https://img.youtube.com/vi/'+ytId+'/mqdefault.jpg" alt="" onerror="this.style.display=\'none\'">'
+            : '<div class="thumb-placeholder" style="background:rgba(24,119,242,.15);font-size:1.5rem">f</div>';
+          const platLabel = isYT ? '&#x25BA; YouTube' : 'f Facebook';
+          const platClass = isYT ? 'yt' : 'fb';
+          const delBtn = adminMode
+            ? '<button class="btn-del" onclick="deleteSummerItem(\''+stage+'\',\'video\',\''+v.id+'\')">&#x2715;</button>'
+            : '';
+          const platform = isYT ? 'youtube' : 'facebook';
+          const safeVideoUrl = v.url.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+          const safeVideoTitle = v.title.replace(/'/g,"\\'");
+          return '<div class="video-item">'
+            + '<div class="video-thumb">'+thumbHtml+'</div>'
+            + '<div class="video-info">'
+            +   '<div class="video-title">'+v.title+'</div>'
+            +   '<div class="video-meta"><span class="video-platform '+platClass+'">'+platLabel+'</span></div>'
+            +   (v.desc ? '<div class="video-desc">'+v.desc+'</div>' : '')
+            + '</div>'
+            + '<div class="video-actions">'
+            +   '<button class="btn-watch" onclick="openVideoPlayer(\''+safeVideoUrl+'\',\''+safeVideoTitle+'\',\''+platform+'\')">&#x25BA; مشاهدة</button>'
+            +   delBtn
+            + '</div>'
+            + '</div>';
+        }).join('');
+      }
+    }
+
+    // Links
+    const lEl = document.getElementById('sumLinks-'+stage);
+    if(lEl){
+      if(!data.links || !data.links.length){
+        lEl.innerHTML = '<div class="sitelinks-empty">لا توجد روابط بعد</div>';
+      } else {
+        lEl.innerHTML = data.links.map(function(lk){
+          function shortUrl(u){ try{ return new URL(u).hostname; }catch(e){ return u; } }
+          const safeUrl   = lk.url.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+          const safeName  = lk.name.replace(/'/g,"\\'");
+          const delBtn = adminMode
+            ? '<button class="btn-del-sitelink" onclick="event.stopPropagation();deleteSummerItem(\''+stage+'\',\'link\',\''+lk.id+'\')" title="حذف">&#x2715;</button>'
+            : '';
+          return '<div class="sitelink-card" onclick="openLinkViewer(\''+safeUrl+'\',\''+safeName+'\')">'
+            + delBtn
+            + '<div class="sitelink-icon">'+(lk.icon||'🌐')+'</div>'
+            + '<div class="sitelink-info">'
+            +   '<div class="sitelink-name">'+lk.name+'</div>'
+            +   '<div class="sitelink-url">'+shortUrl(lk.url)+'</div>'
+            + '</div>'
+            + '<span class="sitelink-arrow">&#x2197;</span>'
+            + '</div>';
+        }).join('');
+      }
+    }
+  });
+}
+
+async function addSummerItem(){
+  if(!adminMode){showNotif('⚠️ يجب تسجيل الدخول كأدمن',true);return;}
+  const stage = document.getElementById('sumStage').value;
+  const type  = document.getElementById('sumType').value;
+  const title = document.getElementById('sumTitle').value.trim();
+  const url   = document.getElementById('sumUrl').value.trim();
+  const desc  = document.getElementById('sumDesc').value.trim();
+  const icon  = document.getElementById('sumIcon').value.trim()||'🌐';
+  if(!title){showNotif('⚠️ أدخل العنوان',true);return;}
+  if(!url||!url.startsWith('http')){showNotif('⚠️ أدخل رابطاً صحيحاً يبدأ بـ https://',true);return;}
+  if(!summerData[stage]) summerData[stage]={videos:[],links:[]};
+  const id='sum_'+Date.now();
+  if(type==='video'){
+    summerData[stage].videos.push({id,title,url,desc});
+  } else {
+    summerData[stage].links.push({id,name:title,url,icon,desc});
+  }
+  await saveSummerData();
+  document.getElementById('sumTitle').value='';
+  document.getElementById('sumUrl').value='';
+  document.getElementById('sumDesc').value='';
+  document.getElementById('sumIcon').value='';
+  renderSummerPage();
+  showNotif('✅ تم الإضافة: '+title);
+}
+
+async function deleteSummerItem(stage,type,id){
+  if(!confirm('حذف هذا العنصر؟')) return;
+  if(type==='video') summerData[stage].videos = summerData[stage].videos.filter(function(x){return x.id!==id;});
+  else               summerData[stage].links  = summerData[stage].links.filter(function(x){return x.id!==id;});
+  await saveSummerData();
+  renderSummerPage();
+  showNotif('🗑 تم الحذف');
+}
+
+async function saveSummerData(){
+  await dbSet('summerData', summerData);
+}
+
+window.showSummerStage  = showSummerStage;
+window.addSummerItem    = addSummerItem;
+window.deleteSummerItem = deleteSummerItem;
+
+window.switchPage            = switchPage;
+window.showStage             = showStage;
+window.openGrade             = openGrade;
+window.closeGradeModal       = closeGradeModal;
+window.closeModal            = closeModal;
+window.closeModalById        = closeModalById;
+window.selectPlatform        = selectPlatform;
+window.previewEmbed          = previewEmbed;
+window.addVideo              = addVideo;
+window.deleteVideo           = deleteVideo;
+window.openSessionModal      = openSessionModal;
+window.selectSessionPlatform = selectSessionPlatform;
+window.addSession            = addSession;
+window.deleteSession         = deleteSession;
+window.openScheduleModal     = openScheduleModal;
+window.addSchedule           = addSchedule;
+window.deleteSchedule        = deleteSchedule;
+window.adminLogin            = adminLogin;
+window.adminLogout           = adminLogout;
+window.changePassword        = changePassword;
+window.saveBrand             = saveBrand;
+window.saveHero              = saveHero;
+window.saveContact           = saveContact;
+window.uploadLogo            = uploadLogo;
+window.removeLogo            = removeLogo;
+window.adminEditAvatar       = adminEditAvatar;
+window.uploadAvatar          = uploadAvatar;
+window.removeAvatar          = removeAvatar;
+window.renderAdminPage       = renderAdminPage;
+window.studentLogin          = studentLogin;
+window.studentLogout         = studentLogout;
+window.goAdminLogin          = goAdminLogin;
+window.addStudent            = addStudent;
+window.deleteStudent         = deleteStudent;
+window.updateGradeOptions    = updateGradeOptions;
+window.openAddSitelinkForm   = openAddSitelinkForm;
+window.addSitelink           = addSitelink;
+window.deleteSitelink        = deleteSitelink;
+
+// ============================================================
+// URL PARAMS — detect ?admin=1 or ?user=1
+// ============================================================
+function checkUrlParams(){
+  const params = new URLSearchParams(window.location.search);
+
+  // ?admin=1  → go directly to admin login page, hide student login
+  if(params.get('admin') === '1'){
+    document.getElementById('studentLoginScreen').classList.add('hidden');
+    // hide admin link from student login (not needed here anyway)
+    const adminLink = document.querySelector('.login-admin-link');
+    if(adminLink) adminLink.style.display = 'none';
+    // go to admin page after listeners attach
+    setTimeout(()=>{ switchPage('admin'); }, 100);
+    return;
+  }
+
+  // ?user=1 or default → hide the "دخول كأدمن" link from student login screen
+  const adminLink = document.querySelector('.login-admin-link');
+  if(adminLink){
+    if(params.get('user') === '1'){
+      adminLink.style.display = 'none';
+    }
+    // If no param at all → keep admin link visible (default behaviour)
+  }
+
+  // Show student login screen as normal
+  document.getElementById('studentLoginScreen').classList.remove('hidden');
+}
+
+// ============================================================
+// INIT — attach Firebase listeners, then hide loader
+// ============================================================
+window.addEventListener('load', () => {
+  // Check URL parameters first
+  checkUrlParams();
+
+  // Attach real-time listeners; they will call render* functions
+  // as soon as data arrives from Firebase.
+  attachListeners();
+
+  // Hide the loader after a short grace period so the first
+  // Firebase snapshot has time to arrive and render.
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800);
+});
+
+</script>
+</body>
+</html>
